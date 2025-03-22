@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <!-- <q-header elevated>
       <q-toolbar>
         <q-btn
           flat
@@ -17,18 +17,33 @@
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
-    </q-header>
+    </q-header> -->
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      class="q-px-md q-py-lg q-gutter-y-lg"
     >
       <q-list>
         <q-item-label
           header
         >
-          Essential Links
+         <img src="~assets/logo.svg" alt="loading" class="logo">
+        </q-item-label>
+
+        <EssentialLink
+          v-for="link in linksList"
+          :key="link.title"
+          v-bind="link"
+        />
+      </q-list>
+
+      <q-list>
+        <q-item-label
+          header
+        >
+         <img src="~assets/logo.svg" alt="loading" class="logo">
         </q-item-label>
 
         <EssentialLink
@@ -46,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
@@ -94,9 +109,9 @@ const linksList = [
   }
 ]
 
-const leftDrawerOpen = ref(false)
+// const leftDrawerOpen = ref(false)
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+// function toggleLeftDrawer () {
+//   leftDrawerOpen.value = !leftDrawerOpen.value
+// }
 </script>
