@@ -5,8 +5,18 @@
 .rounded-8 {
     border-radius: 8px !important;
 }
+.rounded-12 {
+    border-radius: 12px !important;
+}
+.rounded-16 {
+    border-radius: 16px !important;
+}
 .rounded-6 {
     border-radius: 6px !important;
+}
+
+.text-weight-600 {
+    font-weight: 600;
 }
 
 svg {
@@ -15,6 +25,25 @@ svg {
 
 .font-12px {
     font-size: 12px;
+}
+.font-16px {
+    font-size: 16px;
+}
+
+.q-table tbody td{
+  color: grey;
+}
+
+.stripe-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.q-field__control {
+  border-radius: 8px !important;
+}
+
+.q-field--outlined .q-field__control:before {
+    border: 1px solid #D5D7DA;
 }
 
 .layout-flow {

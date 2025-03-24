@@ -41,7 +41,9 @@
         </q-item-label>
          <!-- <div class="grey-5">
          </div> -->
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
+          <div v-for="link in linksList" :key="link.title" class="q-mb-md">
+            <RouterLink :to="link.to" style="color: grey; text-decoration: none;">{{ link.title }}</RouterLink>
+          </div>
       </q-list>
     </q-drawer>
 
@@ -52,52 +54,50 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { RouterLink } from 'vue-router';
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'Dashboard',
     icon: 'school',
-    link: 'https://quasar.dev',
+    to: '/dashboard',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'Notifications',
+    icon: 'school',
+    to: 'dashboard/notificatios',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'Users Management',
+    icon: 'school',
+    to: '/dashboard/users',
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
+    title: 'Billing & Payments',
+    icon: 'school',
+    to: '/dashboard/billings',
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
+    title: 'Subscription Management',
+    icon: 'school',
+    to: '/dashboard/subscriptions',
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
+    title: 'Reports & Analytics',
+    icon: 'school',
+    to: '/dashboard/report-analytics',
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'Profile Settings',
+    icon: 'school',
+    to: '/dashboard/profile-setting',
   },
+  {
+    title: 'Team Memebers',
+    icon: 'school',
+    to: '/dashboard/team-members',
+  },
+
 ]
 
 // const leftDrawerOpen = ref(false)
