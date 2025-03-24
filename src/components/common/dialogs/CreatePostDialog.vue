@@ -1,5 +1,4 @@
 <template>
-  <button @click="showDialog">Open Dialog</button>
   <q-dialog ref="dialog" persistent>
     <q-card style="width: 585px; border-radius: 12px">
       <q-card-section>
