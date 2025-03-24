@@ -1,20 +1,32 @@
-// app global css in SCSS form
+.border {
+    border: 1px solid #D5D7DA
+}
+
+.rounded-8 {
+    border-radius: 8px !important;
+}
+.rounded-6 {
+    border-radius: 6px !important;
+}
+
+svg {
+    color: #3C3D3F;
+}
+
+.font-12px {
+    font-size: 12px;
+}
+
 .layout-flow {
     padding: 96px;
 }
 .navPad {
     padding:0.5rem 96px;
 }
-
-.border {
-   border: 1px solid black
-}
 .logo {
     height: 24px;
 }
-.rouded-8 {
-    border-radius: 8px !important;
-}
+
 .gray-background {
     background-color: #0000000A;
 }
