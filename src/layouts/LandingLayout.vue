@@ -1,31 +1,128 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="navPad">
-      <q-toolbar>
-        <!-- <q-btn
+    <q-header elevated class="navPad bg-white no-shadow flex justify-center">
+      <!-- <q-toolbar>
+       
+
+   
+      </q-toolbar> -->
+      <q-toolbar class=" row gap-12 text-grey-7">
+        <img src="~assets/logo.svg" alt="Logo" />
+        <q-space />
+        <div class="col">
+          <div class="collapse-wrapper flex">
+            <q-tabs no-caps inline-label active-color="primary">
+              <q-route-tab
+                v-for="(tab, index) in tabLinks"
+                :key="index"
+                class="cursor-pointer text-center"
+                flat
+                :to="tab.route"
+                outline
+              >
+                <label class="q-ml-sm" :for="tab.name">
+                  {{ tab.name }}
+                </label>
+              </q-route-tab>
+            </q-tabs>
+            <q-space />
+            <div class="flex q-gutter-x-md items-center">
+              <q-btn
+                unelevated
+                no-caps
+                color="white"
+                class="text-black"
+                to="/login"
+                label="Sign In"
+              />
+              <q-btn
+                unelevated
+                no-caps
+                class="b-rounded-sm q-px-lg"
+                color="primary"
+                label="Sign Up"
+              />
+            </div>
+            <!-- <div class="flex q-gutter-x-md items-center" v-else> -->
+            <!-- <q-item> -->
+            <!-- <IconComp
+                v-for="(notify, index) in notificationOptions"
+                :key="index"
+                :icon="notify.icon"
+                width="24"
+                height="24"
+              />
+              <span>|</span>
+              <q-avatar class="q-ml-lg">
+                <img
+                  src="https://lh3.googleusercontent.com/a/ACg8ocIFFH1tH-y-aCVz_Z1v82qy3ctm2ZDSNVyAU-qY2fnnJzIkD1ad=s576-c-no"
+                />
+
+                <q-btn
+                  color="orange"
+                  class="absolute-bottom"
+                  unelevated
+                  text-color="primary"
+                  round
+                  size="5px"
+                  style="z-index: 2; left: 60%"
+                  @click="showDropDown"
+                >
+                  <IconComp icon="uiw:down" width="10" height="10" />
+                </q-btn>
+              </q-avatar>
+              <label class="q-ml-sm text-weight-medium"> Umair </label> -->
+            <!-- </q-item> -->
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <q-btn
           flat
-          dense
           round
-          icon="menu"
+          dense
+          class="btn-menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
-        /> -->
-
-        <q-toolbar-title>
-          Swayvel App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+          icon="menu"
+          @click="showHide(true)"
+        />
       </q-toolbar>
     </q-header>
 
-    <q-page-container class="layout-flow">
+    <q-page-container >
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-// <script setup>
+<script setup>
+import { reactive, ref } from 'vue'
+const tabLinks = reactive([
+  {
+    name: 'Home',
+    route: '/',
+  },
+  {
+    name: 'Features',
+    route: '#',
+  },
+  {
+    name: 'Pricing',
+    route: '#',
+  },
+  {
+    name: 'Testimonials ',
+    route: '#',
+  },
+  {
+    name: 'Contact Us',
+    route: '#',
+  },
+])
+const drawerLeft = ref(false)
+const showHide = (val) => {
+  drawerLeft.value = val
+}
 // import { ref } from 'vue'
 // import EssentialLink from 'components/EssentialLink.vue'
 
@@ -79,4 +176,17 @@
 // function toggleLeftDrawer () {
 //   leftDrawerOpen.value = !leftDrawerOpen.value
 // }
-// </script>
+</script>
+<style scoped>
+.btn-menu {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .collapse-wrapper {
+    display: none;
+  }
+  .btn-menu {
+    display: block;
+  }
+}
+</style>
