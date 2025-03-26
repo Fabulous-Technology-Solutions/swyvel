@@ -12,8 +12,8 @@ const routes = [
           { path:'billings', component: () => import('src/components/super-admin/BillingPayment.vue'), },
           { path:'subscriptions', component: () => import('src/components/super-admin/SubscriptionPlans.vue'), },
           { path:'report-analytics', component: () => import('src/components/super-admin/ReportsAnalytics.vue'), },
-          { path:'team-members', component: () => import('src/components/super-admin/TeamMembers.vue'), },
-          { path:'profile-setting', component: () => import('src/components/super-admin/ProfileSetting.vue'), },
+          { path:'team-members', component: () => import('src/components/common/TeamMembers.vue'), },
+          { path:'profile-setting', component: () => import('src/components/common/ProfileSetting.vue'), },
         ]
       }
     ]
