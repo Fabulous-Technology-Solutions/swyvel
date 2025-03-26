@@ -1,12 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="navPad bg-white no-shadow flex justify-center">
-      <!-- <q-toolbar>
-       
-
-   
-      </q-toolbar> -->
-      <q-toolbar class=" row gap-12 text-grey-7">
+      <q-toolbar class="row gap-12 text-grey-7">
         <img src="~assets/logo.svg" alt="Logo" />
         <q-space />
         <div class="col">
@@ -17,7 +12,7 @@
                 :key="index"
                 class="cursor-pointer text-center"
                 flat
-                :to="tab.route"
+                @click="scrollTo(tab.routeId)"
                 outline
               >
                 <label class="q-ml-sm" :for="tab.name">
@@ -88,8 +83,62 @@
         />
       </q-toolbar>
     </q-header>
+    <q-drawer
+      v-model="drawerLeft"
+      :width="300"
+      :breakpoint="700"
+      elevated
+      side="right"
+      class="bg-white text-black"
+    >
+      <IconComp
+        icon="lets-icons:close-ring-duotone"
+        @click="showHide(false)"
+        class="absolute-left"
+        style="cursor: pointer; z-index: 1"
+        width="34"
+        height="34"
+      />
+      <q-scroll-area class="fit">
+        <div class="q-pa-sm q-mt-xl">
+          <div class="q-pa-md">
+            <img src="~assets/logo.svg" alt="Logo" />
+          </div>
+          <q-list>
+            <q-item v-for="(tab, index) in tabLinks" :key="index">
+              <q-item-section @click="scrollTo(tab.routeId)">
+ 
+                <q-item-label  @click="showHide(false)">{{ tab.name }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item>
+              <q-btn
+                unelevated
+                no-caps
+                outline
+                color="white"
+                class="text-black full-width"
+                to="/login"
+                label="Sign In"
+              />
+            </q-item>
 
-    <q-page-container >
+            <q-item>
+              <q-btn
+                unelevated
+                no-caps
+                class="b-rounded-sm q-px-lg full-width"
+                color="primary"
+                to="#"
+                label="Sign Up"
+              />
+            </q-item>
+          </q-list>
+        </div>
+      </q-scroll-area>
+    </q-drawer>
+
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -97,85 +146,41 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+
 const tabLinks = reactive([
   {
     name: 'Home',
-    route: '/',
+    routeId: 'Home',
   },
   {
     name: 'Features',
-    route: '#',
+    routeId: 'Features',
   },
   {
     name: 'Pricing',
-    route: '#',
+    routeId: 'Pricing',
   },
   {
     name: 'Testimonials ',
-    route: '#',
+    routeId: 'Testimonials',
   },
   {
     name: 'Contact Us',
-    route: '#',
+    routeId: 'Contact',
   },
 ])
 const drawerLeft = ref(false)
 const showHide = (val) => {
   drawerLeft.value = val
 }
-// import { ref } from 'vue'
-// import EssentialLink from 'components/EssentialLink.vue'
+const scrollTo = (id) => {
 
-// const linksList = [
-//   {
-//     title: 'Docs',
-//     caption: 'quasar.dev',
-//     icon: 'school',
-//     link: 'https://quasar.dev'
-//   },
-//   {
-//     title: 'Github',
-//     caption: 'github.com/quasarframework',
-//     icon: 'code',
-//     link: 'https://github.com/quasarframework'
-//   },
-//   {
-//     title: 'Discord Chat Channel',
-//     caption: 'chat.quasar.dev',
-//     icon: 'chat',
-//     link: 'https://chat.quasar.dev'
-//   },
-//   {
-//     title: 'Forum',
-//     caption: 'forum.quasar.dev',
-//     icon: 'record_voice_over',
-//     link: 'https://forum.quasar.dev'
-//   },
-//   {
-//     title: 'Twitter',
-//     caption: '@quasarframework',
-//     icon: 'rss_feed',
-//     link: 'https://twitter.quasar.dev'
-//   },
-//   {
-//     title: 'Facebook',
-//     caption: '@QuasarFramework',
-//     icon: 'public',
-//     link: 'https://facebook.quasar.dev'
-//   },
-//   {
-//     title: 'Quasar Awesome',
-//     caption: 'Community Quasar projects',
-//     icon: 'favorite',
-//     link: 'https://awesome.quasar.dev'
-//   }
-// ]
+  const section = document.getElementById(id)
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
-// const leftDrawerOpen = ref(false)
-
-// function toggleLeftDrawer () {
-//   leftDrawerOpen.value = !leftDrawerOpen.value
-// }
 </script>
 <style scoped>
 .btn-menu {

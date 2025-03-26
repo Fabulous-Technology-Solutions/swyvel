@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-flow ">
+  <div class="layout-flow " id="Features">
     <div class=" row justify-center">
       <div class="col-md-6 q-gutter-y-md">
         <div class="all-paragraphs text-bold text-blue text-center">Features</div>
