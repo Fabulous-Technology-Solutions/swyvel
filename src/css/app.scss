@@ -52,18 +52,106 @@ svg {
 }
 
 .layout-flow {
-    padding: 96px;
+  padding: 96px;
 }
 .navPad {
-    padding:0.5rem 96px;
+  padding: 0.5rem 96px;
 }
-.logo {
-    height: 24px;
+@media (max-width: 1024px) {
+  .navPad {
+    padding: 20px;
+  }
+  .layout-flow {
+    padding: 20px;
+  }
 }
 
+.border {
+  border: 1px solid #1c1c1c1a;
+}
+.logo {
+  height: 24px;
+}
+.rounded-8 {
+  border-radius: 8px !important;
+}
+.rounded-20 {
+  border-radius: 20px;
+}
 .gray-background {
-    background-color: #0000000A;
+  background-color: #0000000a;
 }
 .dashboard-drawer .q-field__control {
-    border-radius: 8px !important;
+  border-radius: 8px !important;
+}
+.all-paragraphs {
+  font-size: 20px;
+  color: #a4a1a1;
+}
+.headings {
+  font-size: 60px;
+}
+.gap-12 {
+  gap: 1.5rem;
+}
+@media (max-width: 768px) {
+  .all-paragraphs {
+    font-size: 12px;
+    // text-align: start;
   }
+  .headings {
+    font-size: 22px;
+    // text-align: start;
+  }
+  .gap-12 {
+    gap: 12px;
+  }
+}
+// ** landing page
+.hero-section {
+  background-image: url('src/assets/landing-page/Artboard.png');
+  background-position: center;
+  background-size: cover;
+}
+.blur-blue {
+  background-color: #2f5cef0d;
+}
+.low-opacity-blue {
+  background-color: #2f5cefc8;
+}
+.font-36 {
+  font-size: 36px;
+}
+.font-30 {
+  font-size: 30px;
+}
+.features-img {
+  height: 100%;
+  width: 100%;
+}
+.img-cards {
+  object-fit: cover !important;
+  height: 11rem;
+  width: 11rem;
+}
+.testimonials {
+    max-width: 500px;
+    background-color: #fafafa;
+  }
+@media (max-width: 768px) {
+  .hero-img {
+    height: 200px;
+  }
+  .header-hero-img {
+    height: 150px;
+  }
+  .font-36 {
+    font-size: 26px;
+  }
+  .font-30 {
+    font-size: 20px;
+  }
+  .w-full {
+    width: 100%;
+  }
+}

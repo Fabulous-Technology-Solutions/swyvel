@@ -14,6 +14,7 @@ const routes = [
           { path:'report-analytics', component: () => import('src/components/super-admin/ReportsAnalytics.vue'), },
           { path:'team-members', component: () => import('src/components/common/TeamMembers.vue'), },
           { path:'profile-setting', component: () => import('src/components/common/ProfileSetting.vue'), },
+
         ]
       }
     ]
