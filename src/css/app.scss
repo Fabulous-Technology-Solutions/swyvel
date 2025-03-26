@@ -46,6 +46,11 @@ svg {
     border: 1px solid #D5D7DA;
 }
 
+.q-dialog__backdrop {
+  background: #A2A1A833;
+  backdrop-filter: blur(10px); 
+}
+
 .layout-flow {
   padding: 96px;
 }

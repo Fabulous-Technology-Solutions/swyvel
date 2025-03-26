@@ -8,7 +8,7 @@
     </div>
     <StatsCards />
     <GraphComp :series="series" :chartOptions="chartOptions" title="Revenue Overview" />
-    <BaseTable title="New Users" :columns="columns" :rows="rows" />
+    <BaseTable title="New Users" tableFor="users" :columns="columns" :rows="rows" />
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <q-card style="width: 400px; border-radius: 12px">
       <q-card-section>
         <form @submit.prevent="submitForm" class="q-gutter-y-lg">
-          <div class="text-h6 text-bold">Add New Member</div>
+          <div class="text-h6 text-bold">{{ dialogType === 'add' ? 'Add New' : 'Update'  }} Member</div>
             <div>
               <q-input
                 v-model="formData.name"
@@ -38,7 +38,7 @@
                 option-label="label"
                 behavior="menu"
               >
-                <!-- Create Role Button Before Options -->
+
                 <template #before-options>
                   <q-item clickable @click="createNewRoleDialog" class="row text-primary items-center">
                     <q-icon name="add" />
@@ -46,7 +46,6 @@
                   </q-item>
                 </template>
 
-                <!-- Custom Option Slot -->
                 <template #option="{ opt }">
                   <q-item clickable @click="selectRole(opt)">
                     <q-item-section>
@@ -65,7 +64,7 @@
 
           <div class="flex justify-between items-center q-gutter-x-md">
             <q-btn no-caps flat label="Cancel" class="col border rounded-8 q-py-sm" @click="hideDialog" />
-            <q-btn type="submit" no-caps flat label="Add" class="col rounded-8 bg-primary text-white q-py-sm" color="primary" @click="hideDialog" />
+            <q-btn type="submit" no-caps flat :label="dialogType === 'add' ? 'Add' : 'Update'" class="col rounded-8 bg-primary text-white q-py-sm" color="primary" @click="hideDialog" />
           </div>
         </form>
       </q-card-section>
@@ -75,7 +74,7 @@
   <q-dialog v-model="showRoleDialog">
     <q-card style="width: 400px; border-radius: 12px;">
       <q-card-section>
-        <div class="text-h6 text-bold">Create New Role</div>
+        <div class="text-h6 text-bold">{{ roleDialogText }} Role</div>
       </q-card-section>
       <q-card-section class="q-gutter-y-lg">
         <q-input v-model="newRoleName" label="Role Title" outlined />
@@ -103,22 +102,46 @@
   </q-dialog>
 </template>
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 const roles = ref([
   {id: 1, label: 'Role 1'},
   {id: 2, label: 'Role 2'},
 ])
-const permissions = ref([
-  {label: 'Permission 1', isAllow: true},
-  {label: 'Permission 2', isAllow: false},
+
+const currentRole = ref('superadmin') //only for dummy data no
+
+const superadminPermissions = ref([
+  {label: 'Dashboard', isAllow: true},
+  {label: 'Notifications', isAllow: false},
+  {label: 'Users Management', isAllow: false},
+  {label: 'Billing & Payments', isAllow: true},
+  {label: 'Subscription Management', isAllow: true},
+  {label: 'Reports & Analytics', isAllow: true},
+  {label: 'Team Members', isAllow: true},
 ])
+const adminPermissions = ref([
+  {label: 'Overview', isAllow: true},
+  {label: 'Analytics', isAllow: true},
+  {label: 'Notifications', isAllow: false},
+  {label: 'Social Accounts', isAllow: true},
+  {label: 'Posts Management', isAllow: false},
+  {label: 'Misinformation Detection', isAllow: true},
+  {label: 'Threat Detection', isAllow: true},
+  {label: 'AI-Driven Insights', isAllow: true},
+  {label: 'Audience Analysis', isAllow: false},
+  {label: 'Team Members', isAllow: false},
+  {label: 'Subscription & Billing', isAllow: false},
+])
+
+const permissions = computed(() => {
+  return currentRole.value === 'superadmin' ? superadminPermissions.value : adminPermissions.value;
+});
 
 const formData = reactive({
   name: '',
   email: '',
   selectedRole: '',
-
 })
 
 const selectRole = (role) => {
@@ -127,7 +150,13 @@ const selectRole = (role) => {
 }
 
 const dialog = ref(null)
-const showDialog = () => {
+const dialogType = ref('')
+
+const showDialog = (type, modelData) => {
+  dialogType.value = type;
+  if(modelData) {
+    console.table(modelData)
+  }
   dialog.value.show();
 };
 const hideDialog = () => {
@@ -143,9 +172,11 @@ function createNewRoleDialog() {
   roleSelectRef.value.hidePopup();
 }
 
+const roleDialogText = ref('Create New');
+
 const editRole = (role) => {
-  console.info(role)
   showRoleDialog.value = true;
+  roleDialogText.value = 'Update'
   newRoleName.value = role.label
   roleSelectRef.value.hidePopup();
 }

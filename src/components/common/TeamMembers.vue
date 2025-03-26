@@ -2,9 +2,9 @@
   <div class="q-gutter-y-lg">
     <div class="flex justify-between items-start">
       <div>
-        <div class="text-h4 text-bold">User Management</div>
+        <div class="text-h4 text-bold">Team Members</div>
         <div class="text-grey-6 q-mt-sm">
-          Manage user accounts and access levels efficiently. View, edit, or remove users as needed.
+          Manage your team, assign roles, and collaborate seamlessly.
         </div>
       </div>
       <q-btn
@@ -12,13 +12,13 @@
         unelevated
         no-caps
         color="primary"
-        label="Add New"
+        label="Add New Member"
         class="rounded-8"
         style="height: 40px"
         @click="openDialog('add')"
       />
     </div>
-    <BaseTable title="New Users" tableFor="users" :columns="columns" :rows="rows" />
+    <BaseTable title="Team Members" tableFor="teams" :columns="columns" :rows="rows" />
   </div>
 
   <NewMemberDialog ref="addMemeberDialog" />
@@ -43,6 +43,41 @@ const columns = [
 ]
 
 const rows = [
+  {
+    userName: 'Olivia Rhye',
+    email: 'olivia@untitledui.com',
+    img: 'https://cdn.quasar.dev/img/avatar5.jpg',
+    plan: 'Pro Plan',
+    status: 'Active',
+  },
+  {
+    userName: 'Phoenix Baker',
+    email: 'phoenix@untitledui.com',
+    img: 'https://cdn.quasar.dev/img/avatar2.jpg',
+    plan: 'Basic Plan',
+    status: 'In Active',
+  },
+  {
+    userName: 'Lana Steiner',
+    email: 'lana@untitledui.com',
+    img: 'https://cdn.quasar.dev/img/avatar3.jpg',
+    plan: 'Basic Plan',
+    status: 'Active',
+  },
+  {
+    userName: 'Demi Wilkinson',
+    email: 'demi@untitledui.com',
+    img: 'https://cdn.quasar.dev/img/avatar4.jpg',
+    plan: 'Free Plan',
+    status: 'Active',
+  },
+  {
+    userName: 'Natali Craig',
+    email: 'natali@untitledui.com',
+    img: 'https://cdn.quasar.dev/img/avatar6.jpg',
+    plan: 'Pro Plan',
+    status: 'In Active',
+  },
   {
     userName: 'Olivia Rhye',
     email: 'olivia@untitledui.com',
