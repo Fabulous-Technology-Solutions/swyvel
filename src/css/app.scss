@@ -133,6 +133,9 @@ svg {
     max-width: 500px;
     background-color: #fafafa;
   }
+  .pricing-plans {
+    min-height: 650px;
+  }
 @media (max-width: 768px) {
   .hero-img {
     height: 200px;
@@ -148,5 +151,14 @@ svg {
   }
   .w-full {
     width: 100%;
+  }
+  .pricing-plans {
+    min-height: max-content;
+  }
+  .btn-get-started {
+    position: unset;
+  }
+  .extra-mb {
+    margin-bottom: 2rem;
   }
 }

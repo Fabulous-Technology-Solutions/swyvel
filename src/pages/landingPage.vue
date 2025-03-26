@@ -26,6 +26,10 @@
     <TestimonialsSection/>
     <GetStarted/>
     <PlansAndPricing/>
+    <FrequentlyQuestions/>
+    <GetInTouch/>
+    <FooterBar/>
+    <CopyRight/>
   </q-page>
 </template>
 
@@ -40,6 +44,10 @@ import WhySwevel from 'src/components/LandingPage/WhySwevel.vue'
 import TestimonialsSection from 'src/components/LandingPage/TestimonialsSection.vue'
 import GetStarted from 'src/components/LandingPage/GetStarted.vue'
 import PlansAndPricing from 'src/components/LandingPage/PlansAndPricing.vue'
+import FrequentlyQuestions from 'src/components/LandingPage/FrequentlyQuestions.vue'
+import GetInTouch from 'src/components/LandingPage/GetInTouch.vue'
+import FooterBar from 'src/components/LandingPage/FooterBar.vue'
+import CopyRight from 'src/components/LandingPage/CopyRight.vue'
 //
 </script>
 

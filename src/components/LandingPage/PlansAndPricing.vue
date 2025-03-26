@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-flow">
+  <div class="layout-flow q-gutter-y-xl">
     <div class="row justify-center">
       <div class="col-md-6 q-gutter-y-md">
         <div class="all-paragraphs text-bold text-blue text-center">Pricing</div>
@@ -11,12 +11,44 @@
       </div>
     </div>
 
-    <div class="q-pa-md row items-start q-gutter-md">
-      <div class="col" v-for="(plan, index) in plans" :key="index">
-        <q-card >
+    <div class="row items-start gap-12">
+      <div class="col-lg col-md-12 full-width " v-for="(plan, index) in plans" :key="index">
+        <q-card  class="rounded-20 pricing-plans">
           <q-card-section>
-            {{ plan.price }}
+            <div class="text-center headings text-bold">
+              {{ plan.price }}
+            </div>
           </q-card-section>
+          <q-card-section class="q-py-none">
+            <div class="text-center all-paragraphs text-bold text-black">
+              {{ plan.plan_type }}
+            </div>
+          </q-card-section>
+          <q-card-section class="q-py-none">
+            <div class="text-center all-paragraphs">
+              {{ plan.title }}
+            </div>
+          </q-card-section>
+          <q-card-section>
+            <q-list>
+              <q-item
+                class="gap-12 flex items-start"
+                v-for="(offer, index) in plan.offers"
+                :key="index"
+              >
+                <img src="~assets/landing-page/greencheck.svg" alt="loading" />
+
+                <div class="all-paragraphs">
+                  {{ offer }}
+                </div>
+              </q-item>
+            </q-list>
+          </q-card-section>
+           <q-card-actions class="q-my-md q-px-xl  absolute-bottom btn-get-started">
+            <q-btn unelevated no-caps color="primary" class="full-width rounded-12 text-bold" padding="md"
+              >Get started</q-btn
+            >
+          </q-card-actions>
         </q-card>
       </div>
     </div>
