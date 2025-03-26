@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-flow column hero-section">
+  <div class="layout-flow column hero-section" id="Home">
     <div class="navPad q-gutter-y-xl">
       <div class="text-center navPad">
         <div class="headings text-bold">AI-Powered Social Media Management for Healthcare</div>
