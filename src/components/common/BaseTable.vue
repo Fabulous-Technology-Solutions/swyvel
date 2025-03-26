@@ -50,6 +50,7 @@
               height="24"
             />
             <IconComp
+              v-if="tableProps.tableFor !== 'billings'"
               @click="(tableFor === 'users' || tableFor === 'teams') ? openEditDialog('edit', props.row) : ''"
               class="cursor-pointer"
               icon="garden:pencil-stroke-16"
@@ -60,7 +61,7 @@
         </q-td>
       </template>
     </q-table>
-    <TablesPagination />
+    <TablesPagination v-if="tableProps.pagination" />
   </q-card>
 
   <NewMember ref="EditMemberDialog" />
@@ -79,6 +80,7 @@ const tableProps = defineProps({
   tableFor: { type: String, required: true },
   columns: { type: Array, required: true },
   rows: { type: Array, required: true },
+  pagination: { type: Boolean, required: true },
 })
 const selected = ref([])
 
