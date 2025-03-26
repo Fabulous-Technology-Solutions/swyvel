@@ -17,7 +17,7 @@
                 :key="index"
                 class="cursor-pointer text-center"
                 flat
-                :to="tab.route"
+               @click="scrollTo(tab.routeId)"
                 outline
               >
                 <label class="q-ml-sm" :for="tab.name">
@@ -97,32 +97,42 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+// import { useRouter } from 'vue-router'
+
+// const router = useRouter()
 const tabLinks = reactive([
   {
     name: 'Home',
-    route: '/',
+    routeId: 'Home',
   },
   {
     name: 'Features',
-    route: '#',
+    routeId: 'Features',
   },
   {
     name: 'Pricing',
-    route: '#',
+    routeId: 'Pricing',
   },
   {
     name: 'Testimonials ',
-    route: '#',
+    routeId: 'Testimonials',
   },
   {
     name: 'Contact Us',
-    route: '#',
+    routeId: 'Contact',
   },
 ])
 const drawerLeft = ref(false)
 const showHide = (val) => {
   drawerLeft.value = val
 }
+const scrollTo = (id) => {
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 // import { ref } from 'vue'
 // import EssentialLink from 'components/EssentialLink.vue'
 

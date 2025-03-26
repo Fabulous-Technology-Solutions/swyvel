@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-flow">
+  <div class="layout-flow" id="Contact">
     <div class="flex flex-center rounded-12 bg-grey-1">
       <div class="col-md-6 q-gutter-y-md q-py-lg">
         <div class="flex flex-center">

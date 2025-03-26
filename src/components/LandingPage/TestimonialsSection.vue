@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-flow">
+  <div class="layout-flow" id="Testimonials">
     <div class="row justify-center">
       <div class="col-md-6 q-gutter-y-md">
         <div class="font-36 text-bold text-center">What Our Users Say</div>
@@ -37,10 +37,10 @@
     </div>
     <div class="q-pa-md flex justify-center items-center full-width q-gutter-x-md">
       <q-btn unelevated   class="rounded-8 q-px-sm"  color="primary" @click="scrollLeft">
-        <IconComp icon="iconoir:arrow-left" width="24" height="24" />
+        <IconComp icon="iconoir:arrow-left" color="white" width="24" height="24" />
       </q-btn>
       <q-btn unelevated :disable="endright" class="rounded-8 q-px-sm" color="primary" @click="scrollRight">
-        <IconComp icon="iconoir:arrow-right" width="24" height="24" />
+        <IconComp icon="iconoir:arrow-right" color="white" width="24" height="24" />
       </q-btn>
     </div>
   </div>

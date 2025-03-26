@@ -2,34 +2,34 @@
   <q-page>
     <HeaderSection />
     <FeatureSection />
-    <!-- <div style="height: 200vh">
-   <q-parallax class="border"> -->
-    <!-- <AllFeatures />
-      <AllFeatures /> -->
-    <!-- Ensure scrollable content -->
-    <!-- <div style="height:200vh"> -->
-    <div class="scroll-container" style="position: relative">
-      <Transition name="fade-slide" mode="out-in">
-        <AllFeatures class="fixed-section" />
-      </Transition>
-      <Transition name="fade-slide" mode="out-in">
-        <MisInformations />
-      </Transition>
-      <Transition name="fade-slide" mode="out-in">
-        <ThreadsDetection />
-      </Transition>
-      <Transition name="fade-slide" mode="out-in">
-        <AutomatedPost />
-      </Transition>
-    </div>
-    <WhySwevel/>
-    <TestimonialsSection/>
-    <GetStarted/>
-    <PlansAndPricing/>
-    <FrequentlyQuestions/>
-    <GetInTouch/>
-    <FooterBar/>
-    <CopyRight/>
+    <q-parallax style="height: 300vh">
+      <template v-slot:content="scope">
+        <div
+          class="absolute column items-center"
+          :style="{
+            top: scope.percentScrolled * 10 + '%',
+            left: 0,
+            right: 0,
+          }"
+        >
+          <div class="text-h3 text-white text-center">Quasar Framework</div>
+          <div class="scroll-container" style="position: relative">
+            <AllFeatures class="fixed-section" />
+            <MisInformations />
+            <ThreadsDetection />
+            <AutomatedPost />
+          </div>
+        </div>
+      </template>
+    </q-parallax>
+    <WhySwevel />
+    <TestimonialsSection />
+    <GetStarted />
+    <PlansAndPricing />
+    <FrequentlyQuestions />
+    <GetInTouch />
+    <FooterBar />
+    <CopyRight />
   </q-page>
 </template>
 
