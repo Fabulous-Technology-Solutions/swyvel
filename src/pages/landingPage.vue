@@ -2,22 +2,26 @@
   <q-page>
     <HeaderSection />
     <FeatureSection />
-    <q-parallax style="height: 300vh">
+    <q-parallax class="paralex">
       <template v-slot:content="scope">
         <div
           class="absolute column items-center"
           :style="{
-            top: scope.percentScrolled * 10 + '%',
+            top: scope.percentScrolled * 5 + '%',
             left: 0,
             right: 0,
           }"
         >
-          <div class="text-h3 text-white text-center">Quasar Framework</div>
           <div class="scroll-container" style="position: relative">
-            <AllFeatures class="fixed-section" />
+            <AllFeatures />
+            <!-- </q-transition> -->
             <MisInformations />
             <ThreadsDetection />
             <AutomatedPost />
+            <MultiPlatform />
+
+            <TeamCollaboration />
+            <SubscriptionBilling/>
           </div>
         </div>
       </template>
@@ -40,6 +44,10 @@ import AllFeatures from 'src/components/LandingPage/AllFeatures.vue'
 import MisInformations from 'src/components/LandingPage/MisInformations.vue'
 import ThreadsDetection from 'src/components/LandingPage/ThreadsDetection.vue'
 import AutomatedPost from 'src/components/LandingPage/AutomatedPost.vue'
+import MultiPlatform from 'src/components/LandingPage/MultiPlatform.vue'
+import TeamCollaboration from 'src/components/LandingPage/TeamCollaboration.vue'
+import SubscriptionBilling from 'src/components/LandingPage/SubscriptionBilling.vue'
+
 import WhySwevel from 'src/components/LandingPage/WhySwevel.vue'
 import TestimonialsSection from 'src/components/LandingPage/TestimonialsSection.vue'
 import GetStarted from 'src/components/LandingPage/GetStarted.vue'

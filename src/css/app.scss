@@ -136,6 +136,9 @@ svg {
   .pricing-plans {
     min-height: 650px;
   }
+  .paralex {
+    height: calc(700vh + 20vh) !important;
+  }
 @media (max-width: 768px) {
   .hero-img {
     height: 200px;
@@ -160,5 +163,25 @@ svg {
   }
   .extra-mb {
     margin-bottom: 2rem;
+  }
+}
+@media (max-width: 1440px) {
+  .paralex {
+    height: 520vh !important;
+  }
+}
+@media (max-width: 1024px) {
+  .paralex {
+    height: 420vh !important;
+  }
+}
+@media (max-width: 500px) {
+  .paralex {
+    height: 450vh !important;
+  }
+}
+@media (max-width: 425px) {
+  .paralex {
+    height: 530vh !important;
   }
 }

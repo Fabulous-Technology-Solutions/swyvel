@@ -2,6 +2,8 @@
   <div class="layout-flow ">
     <!-- <q-parallax height="50vh">
       <div class="full-width full-height"> -->
+            <q-transition appear enter="slide-up" leave="slide-up" class="transition-duration-500">
+
         <div class="row item-center">
           <div class="col-md-6  q-gutter-y-md">
             <div class="font-30 text-bold">AI-Powered Analytics</div>
@@ -67,6 +69,8 @@
         <img src="~assets/landing-page/Reports.png" class="features-img hero-img" alt="loading" />
       </div>
     </div> -->
+            </q-transition>
+
   </div>
 </template>
 <script setup>
