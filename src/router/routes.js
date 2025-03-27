@@ -5,10 +5,13 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'dashboard',
         component: () => import('pages/DashboardsPage.vue'),
         children: [
-          { path: '', component: () => import('src/components/super-admin/SuperDashboard.vue') },
+          {
+            path: '',
+            name: 'dashboard',
+            component: () => import('src/components/super-admin/SuperDashboard.vue'),
+          },
           {
             path: 'users',
             name: 'management',
@@ -47,6 +50,11 @@ const routes = [
     path: '/',
     component: () => import('src/layouts/LandingLayout.vue'),
     children: [{ path: '', component: () => import('pages/landingPage.vue') }],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('pages/LoginPage.vue'),
   },
 
   // Always leave this as last one,

@@ -40,6 +40,7 @@
             class="rounded-8"
             color="gray-background"
           >
+            <!-- {{}} -->
             <template v-slot:prepend>
               <IconComp icon="iconoir:search" width="24" height="24" />
             </template>
@@ -52,38 +53,182 @@
         <q-item-label class="text-grey-7 q-py-md text-h6"> Dashboards </q-item-label>
         <!-- <div class="grey-5">
          </div> -->
-        <router-link
-          v-for="dash in dashboard"
-          :key="dash.title"
-          :to="dash.to"
-          style="color: grey; text-decoration: none"
-        >
-          <q-item active-class="my-menu-link" class="flex items-center" :active="route.name.includes(dash.name)"  >
-            {{ dash.title }}  
-          </q-item>
-        </router-link>
-        <q-item-label class="text-grey-7 q-py-md text-h6"> Pages </q-item-label>
-        <router-link
-          v-for="page in pages"
-          :key="page.title"
-          :to="page.to"
-          style="color: grey; text-decoration: none"
-        >
-          <q-item active-class="my-menu-link" class="flex items-center" :active="route.name.includes(page.name)">
-            {{ page.title }}
-          </q-item>
-        </router-link>
+        <div v-if="store.currentUser !== 'admin'">
+          <router-link
+            v-for="dash_super in dashboard_superAdmin"
+            :key="dash_super.title"
+            :to="dash_super.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(dash_super.name)"
+            >
+              <IconComp
+                v-if="dash_super.name == 'dashboard'"
+                class="icon"
+                style="transform: rotate(250deg)"
+                :icon="dash_super.icon"
+                width="24"
+                height="24"
+              />
+              <!-- <img v-if="dash.name === 'dashboard'" class="icon" height="24px" src="~assets/ChartPieSlice-d.svg" alt="loading"> -->
+              <IconComp v-else :icon="dash_super.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ dash_super.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-else>
+          <router-link
+            v-for="dash in dashboard"
+            :key="dash.title"
+            :to="dash.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(dash.name)"
+            >
+              <IconComp
+                v-if="dash.name === 'overview'"
+                class="icon"
+                style="transform: rotate(250deg)"
+                :icon="dash.icon"
+                width="24"
+                height="24"
+              />
+              <!-- <img v-if="dash.name === 'dashboard'" class="icon" height="24px" src="~assets/ChartPieSlice-d.svg" alt="loading"> -->
+              <IconComp v-else :icon="dash.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ dash.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-if="store.currentUser == 'admin'">
+          <q-item-label class="text-grey-7 q-py-md text-h6"> Social Media Management </q-item-label>
+          <router-link
+            v-for="media in socials"
+            :key="media.title"
+            :to="media.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(media.name)"
+            >
+              <IconComp :icon="media.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ media.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-if="store.currentUser !== 'admin'">
+          <q-item-label class="text-grey-7 q-py-md text-h6"> Pages </q-item-label>
+          <router-link
+            v-for="page in pages"
+            :key="page.title"
+            :to="page.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(page.name)"
+            >
+              <IconComp :icon="page.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ page.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-if="store.currentUser == 'admin'">
+          <q-item-label class="text-grey-7 q-py-md text-h6"> Security & Reputation </q-item-label>
+          <router-link
+            v-for="secure in security"
+            :key="secure.title"
+            :to="secure.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(secure.name)"
+            >
+              <IconComp :icon="secure.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ secure.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-if="store.currentUser == 'admin'">
+          <q-item-label class="text-grey-7 q-py-md text-h6"> Reports & Insights </q-item-label>
+          <router-link
+            v-for="insight in insights"
+            :key="insight.title"
+            :to="insight.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(insight.name)"
+            >
+              <IconComp :icon="insight.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ insight.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+
         <q-item-label class="text-grey-7 q-py-md text-h6"> Settings </q-item-label>
-        <router-link
-          v-for="setting in settings"
-          :key="setting.title"
-          :to="setting.to"
-          style="color: grey; text-decoration: none"
-        >
-          <q-item active-class="my-menu-link" class="flex items-center" :active="route.name.includes(setting.name)">
-            {{ setting.title }} {{setting.name}}
-          </q-item>
-        </router-link>
+        <div v-if="store.currentUser !== 'admin'">
+          <router-link
+            v-for="setting_super in settings_super"
+            :key="setting_super.title"
+            :to="setting_super.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(setting_super.name)"
+            >
+              <IconComp :icon="setting_super.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ setting_super.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
+        <div v-else>
+          <router-link
+            v-for="setting in settings"
+            :key="setting.title"
+            :to="setting.to"
+            style="color: black; text-decoration: none"
+          >
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+              :active="route.name.includes(setting.name)"
+            >
+              <IconComp :icon="setting.icon" class="icon" width="24" height="24" />
+              <span class="q-ml-md">
+                {{ setting.title }}
+              </span>
+            </q-item>
+          </router-link>
+        </div>
       </q-list>
     </q-drawer>
 
@@ -94,51 +239,113 @@
 </template>
 
 <script setup>
-// import { RouterLink } from 'vue-router'
-// import {computed} from 'vue';
 import { useRoute } from 'vue-router'
+import { userStore } from 'src/stores/userStore'
+const store = userStore()
 const route = useRoute()
 
-// const activeTab = (name) => computed(() => route.name.includes(name))
-// const activeTab = (name) => {
-//   return computed(() => route.name.includes(name) ? true : false);
-// }
 const dashboard = [
+  {
+    title: 'Overview',
+    name: 'overview',
+    icon: 'hugeicons:pie-chart-02',
+    to: '#',
+  },
+  {
+    title: 'Analytics',
+    name: 'analytics',
+    icon: 'fluent-mdl2:analytics-view',
+    to: '#',
+  },
+  {
+    title: 'Notifications',
+    icon: 'ph:notification-duotone',
+    name: 'notifications',
+    to: '#',
+  },
+]
+const dashboard_superAdmin = [
   {
     title: 'Dashboard',
     name: 'dashboard',
-    icon: 'school',
+    icon: 'hugeicons:pie-chart-02',
     to: '/dashboard',
   },
   {
     title: 'Notifications',
-    icon: 'school',
+    icon: 'ph:notification-duotone',
     name: 'notifications',
-    to: 'dashboard/notificatios',
+    to: '#',
+    role: 'superadmin',
   },
 ]
+const socials = [
+  {
+    title: 'Social Accounts',
+    icon: 'ph:link-duotone',
+    name: 'social',
+    to: '#',
+  },
+  {
+    title: 'Posts Management',
+    icon: 'fluent-mdl2:post-update',
+    name: 'post',
+    to: '#',
+  },
+]
+
+const security = [
+  {
+    title: 'Misinformation Detection',
+    icon: 'line-md:alert-twotone',
+    name: 'misinformation',
+    to: '#',
+  },
+  {
+    title: 'Threat Detection',
+    icon: 'duo-icons:alert-octagon',
+    name: 'threads',
+    to: '#',
+  },
+]
+
+const insights = [
+  {
+    title: 'AI-Driven Insights',
+    icon: 'carbon:analytics',
+    name: 'ai-driven',
+    to: '#',
+  },
+  {
+    title: 'Audience Analysis',
+    icon: 'ph:users-three-duotone',
+    name: 'audience',
+    to: '#',
+  },
+]
+
 const pages = [
   {
     title: 'Users Management',
-    icon: 'school',
+    icon: 'ph:users-duotone',
     name: 'management',
     to: '/dashboard/users',
   },
   {
     title: 'Billing & Payments',
-    icon: 'school',
+    icon: 'iconamoon:file-document-duotone',
     name: 'billing',
     to: '/dashboard/billings',
   },
   {
     title: 'Subscription Management',
-    icon: 'school',
+    icon: 'material-symbols-light:id-card-outline',
     name: 'subscription',
     to: '/dashboard/subscriptions',
   },
   {
     title: 'Reports & Analytics',
-    icon: 'school',
+    icon: 'carbon:analytics',
     name: 'reports',
     to: '/dashboard/report-analytics',
   },
@@ -146,21 +353,47 @@ const pages = [
 const settings = [
   {
     title: 'Profile Settings',
-    icon: 'school',
+    icon: 'ant-design:setting-twotone',
     name: 'profile',
     to: '/dashboard/profile-setting',
   },
   {
     title: 'Team Memebers',
-    icon: 'school',
+    icon: 'ph:users-four-duotone',
     name: 'teams',
     to: '/dashboard/team-members',
   },
+  {
+    title: 'Subscription & Billing',
+    icon: 'material-symbols-light:id-card-outline',
+    name: 'subscriptions',
+    to: '#',
+  },
+  {
+    title: 'Logout',
+    icon: 'solar:logout-bold-duotone',
+    name: 'login',
+    to: '/login',
+  },
 ]
-
-// const leftDrawerOpen = ref(false)
-
-// function toggleLeftDrawer () {
-//   leftDrawerOpen.value = !leftDrawerOpen.value
-// }
+const settings_super = [
+  {
+    title: 'Profile Settings',
+    icon: 'ant-design:setting-twotone',
+    name: 'profile',
+    to: '/dashboard/profile-setting',
+  },
+  {
+    title: 'Team Memebers',
+    icon: 'ph:users-four-duotone',
+    name: 'teams',
+    to: '/dashboard/team-members',
+  },
+  {
+    title: 'Logout',
+    icon: 'solar:logout-bold-duotone',
+    name: 'login',
+    to: '/login',
+  },
+]
 </script>

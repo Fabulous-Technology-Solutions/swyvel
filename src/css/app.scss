@@ -1,36 +1,36 @@
 .border {
-    border: 1px solid #D5D7DA
+  border: 1px solid #d5d7da;
 }
 
 .rounded-8 {
-    border-radius: 8px !important;
+  border-radius: 8px !important;
 }
 .rounded-12 {
-    border-radius: 12px !important;
+  border-radius: 12px !important;
 }
 .rounded-16 {
-    border-radius: 16px !important;
+  border-radius: 16px !important;
 }
 .rounded-6 {
-    border-radius: 6px !important;
+  border-radius: 6px !important;
 }
 
 .text-weight-600 {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 svg {
-    color: #3C3D3F;
+  color: #3c3d3f;
 }
 
 .font-12px {
-    font-size: 12px;
+  font-size: 12px;
 }
 .font-16px {
-    font-size: 16px;
+  font-size: 16px;
 }
 
-.q-table tbody td{
+.q-table tbody td {
   color: grey;
 }
 
@@ -43,12 +43,12 @@ svg {
 }
 
 .q-field--outlined .q-field__control:before {
-    border: 1px solid #D5D7DA;
+  border: 1px solid #d5d7da;
 }
 
 .q-dialog__backdrop {
-  background: #A2A1A833;
-  backdrop-filter: blur(10px); 
+  background: #a2a1a833;
+  backdrop-filter: blur(10px);
 }
 
 .layout-flow {
@@ -135,15 +135,15 @@ svg {
   width: 11rem;
 }
 .testimonials {
-    max-width: 500px;
-    background-color: #fafafa;
-  }
-  .pricing-plans {
-    min-height: 650px;
-  }
-  .paralex {
-    height: calc(700vh + 20vh) !important;
-  }
+  max-width: 500px;
+  background-color: #fafafa;
+}
+.pricing-plans {
+  min-height: 650px;
+}
+.paralex {
+  height: calc(700vh + 20vh) !important;
+}
 @media (max-width: 768px) {
   .hero-img {
     height: 200px;
@@ -193,18 +193,32 @@ svg {
 
 // admin dashboard
 .my-menu-link {
-  background-color: #2F5CEF0D;
+  background-color: #2f5cef0d;
   color: $primary;
   position: relative;
 }
-.my-menu-link::after{
+.my-menu-link .icon {
+  color: $primary;
+  margin-left: 1rem;
+}
+.my-menu-link::after {
   content: '';
   position: absolute;
   height: 60%;
-  border:4px solid blue;
+  border: 4px solid blue;
   border-radius: 10px;
-  left: 0;
+  left: 10px;
+  top: 20%;
+  animation: animafter 0.5s ease-in-out;
+}
+@keyframes animafter {
+  from {
+    height: 0;
+    top: 100%;
+  }
+  to {
+    height: 60%;
   top: 20%;
 
-
+  }
 }
