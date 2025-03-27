@@ -45,12 +45,12 @@
               <IconComp icon="iconoir:search" width="24" height="24" />
             </template>
             <template v-slot:append>
-              <IconComp icon="ri:command-fill" width="24" height="24" />
-              <span>/</span>
+              <IconComp icon="ri:command-fill" width="18" height="18" />
+              <span style="font-size:18px">/</span>
             </template>
           </q-input>
         </q-item-label>
-        <q-item-label class="text-grey-7 q-py-md text-h6"> Dashboards </q-item-label>
+        <q-item-label class="text-grey-7 q-py-md font-14"> Dashboards </q-item-label>
         <!-- <div class="grey-5">
          </div> -->
         <div v-if="store.currentUser !== 'admin'">
@@ -103,14 +103,14 @@
               />
               <!-- <img v-if="dash.name === 'dashboard'" class="icon" height="24px" src="~assets/ChartPieSlice-d.svg" alt="loading"> -->
               <IconComp v-else :icon="dash.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ dash.title }}
               </span>
             </q-item>
           </router-link>
         </div>
         <div v-if="store.currentUser == 'admin'">
-          <q-item-label class="text-grey-7 q-py-md text-h6"> Social Media Management </q-item-label>
+          <q-item-label class="text-grey-7 q-py-md font-14"> Social Media Management </q-item-label>
           <router-link
             v-for="media in socials"
             :key="media.title"
@@ -123,14 +123,14 @@
               :active="route.name.includes(media.name)"
             >
               <IconComp :icon="media.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ media.title }}
               </span>
             </q-item>
           </router-link>
         </div>
         <div v-if="store.currentUser !== 'admin'">
-          <q-item-label class="text-grey-7 q-py-md text-h6"> Pages </q-item-label>
+          <q-item-label class="text-grey-7 q-py-md font-14"> Pages </q-item-label>
           <router-link
             v-for="page in pages"
             :key="page.title"
@@ -143,14 +143,14 @@
               :active="route.name.includes(page.name)"
             >
               <IconComp :icon="page.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ page.title }}
               </span>
             </q-item>
           </router-link>
         </div>
         <div v-if="store.currentUser == 'admin'">
-          <q-item-label class="text-grey-7 q-py-md text-h6"> Security & Reputation </q-item-label>
+          <q-item-label class="text-grey-7 q-py-md font-14"> Security & Reputation </q-item-label>
           <router-link
             v-for="secure in security"
             :key="secure.title"
@@ -163,14 +163,14 @@
               :active="route.name.includes(secure.name)"
             >
               <IconComp :icon="secure.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ secure.title }}
               </span>
             </q-item>
           </router-link>
         </div>
         <div v-if="store.currentUser == 'admin'">
-          <q-item-label class="text-grey-7 q-py-md text-h6"> Reports & Insights </q-item-label>
+          <q-item-label class="text-grey-7 q-py-md font-14"> Reports & Insights </q-item-label>
           <router-link
             v-for="insight in insights"
             :key="insight.title"
@@ -183,14 +183,14 @@
               :active="route.name.includes(insight.name)"
             >
               <IconComp :icon="insight.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ insight.title }}
               </span>
             </q-item>
           </router-link>
         </div>
 
-        <q-item-label class="text-grey-7 q-py-md text-h6"> Settings </q-item-label>
+        <q-item-label class="text-grey-7 q-py-md font-14"> Settings </q-item-label>
         <div v-if="store.currentUser !== 'admin'">
           <router-link
             v-for="setting_super in settings_super"
@@ -204,7 +204,7 @@
               :active="route.name.includes(setting_super.name)"
             >
               <IconComp :icon="setting_super.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ setting_super.title }}
               </span>
             </q-item>
@@ -223,7 +223,7 @@
               :active="route.name.includes(setting.name)"
             >
               <IconComp :icon="setting.icon" class="icon" width="24" height="24" />
-              <span class="q-ml-md">
+              <span class="q-ml-md font-14">
                 {{ setting.title }}
               </span>
             </q-item>
@@ -243,7 +243,7 @@ import { useRoute } from 'vue-router'
 import { userStore } from 'src/stores/userStore'
 const store = userStore()
 const route = useRoute()
-
+// const currentUser = route.currentUser;
 const dashboard = [
   {
     title: 'Overview',
@@ -284,13 +284,13 @@ const socials = [
     title: 'Social Accounts',
     icon: 'ph:link-duotone',
     name: 'social',
-    to: '#',
+    to: '/dashboard/social-accounts',
   },
   {
     title: 'Posts Management',
     icon: 'fluent-mdl2:post-update',
-    name: 'post',
-    to: '#',
+    name: 'post-management',
+    to: '/dashboard/post-management',
   },
 ]
 
