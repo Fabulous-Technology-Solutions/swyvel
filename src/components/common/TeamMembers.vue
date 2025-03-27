@@ -18,7 +18,7 @@
         @click="openDialog('add')"
       />
     </div>
-    <BaseTable title="Team Members" tableFor="teams" :columns="columns" :rows="rows" />
+    <BaseTable title="Team Members" tableFor="teams" :columns="columns" :rows="rows" :pagination = "true"  />
   </div>
 
   <NewMemberDialog ref="addMemeberDialog" />

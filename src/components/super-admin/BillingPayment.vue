@@ -4,7 +4,7 @@
       <div class="text-h4 text-bold">Billing & Payments</div>
       <div class="text-grey-6 q-mt-sm">View and manage your payment history, and invoices.</div>
     </div>
-    <BaseTable title="Subscription Plan Details" tableFor="billings" :columns="columns" :rows="rows" />
+    <BaseTable title="Subscription Plan Details" tableFor="billings" :columns="columns" :rows="rows" :pagination = "true"  />
 
   </div>
 </template>
