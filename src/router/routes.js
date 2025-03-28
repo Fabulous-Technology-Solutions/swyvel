@@ -43,6 +43,14 @@ const routes = [
             component: () => import('src/components/common/ProfileSetting.vue'),
           },
           // * admin side
+          { path: 'overview',
+            name:'overview',
+            component: () => import('src/components/admin/overview/OverviewStats.vue')
+          },
+          { path: 'analytics',
+            name:'analytics',
+            component: () => import('src/components/admin/analytics/AnalyticsComp.vue')
+          },
           {
             path: 'social-accounts',
             name: 'social',
