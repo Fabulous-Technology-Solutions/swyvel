@@ -249,13 +249,13 @@ const dashboard = [
     title: 'Overview',
     name: 'overview',
     icon: 'hugeicons:pie-chart-02',
-    to: '#',
+    to: '/dashboard/overview',
   },
   {
     title: 'Analytics',
     name: 'analytics',
     icon: 'fluent-mdl2:analytics-view',
-    to: '#',
+    to: '/dashboard/analytics',
   },
   {
     title: 'Notifications',
