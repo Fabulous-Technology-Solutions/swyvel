@@ -52,6 +52,16 @@ const routes = [
             path: 'post-management',
             name: 'post-management',
             component: () => import('src/components/admin/PostManagement.vue'),
+          },
+          {
+            path: 'miss-information',
+            name: 'miss-information',
+            component: () => import('src/components/admin/MissInformation.vue'),
+          },
+          {
+            path: 'threats',
+            name: 'threats',
+            component: () => import('src/components/admin/ThreatsDetection.vue'),
           }
         ],
       },

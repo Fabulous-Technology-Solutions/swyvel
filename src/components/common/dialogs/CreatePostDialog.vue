@@ -15,7 +15,7 @@
               class="rounded-8"
             />
           </div>
-          <div class="border rounded-8 q-px-md">
+          <div class="rounded-8 ">
             <div v-if="date && time" class="q-mt-sm">
               <span class="flex items-center q-gutter-x-sm font-12px text-grey-7 bg-blue-grey-1 rounded-8 q-pr-sm" style="width: fit-content;">
                 <IconComp icon="solar:calendar-linear" width="20px" height="20px" />
@@ -23,14 +23,13 @@
                 <q-btn flat no-caps label="Edit" color="primary" class="no-padding" @click="scheduleDialog = true" />
               </span>
             </div>
-              <q-input
-                v-model="formData.description"
-                borderless
-                type="text"
-                color="primary"
-                class="rounded-8"
-                placeholder="Write your post text here..."
-              />
+             <q-input
+            dense
+            v-model="formData.description"
+            outlined
+            type="textarea"
+            placeholder="Write your post text here..."
+          />
               <div v-if="uploadedFiles.length" class="q-mt-md">
                 <div v-for="(file, index) in uploadedFiles" :key="index" class="q-mb-md">
                   <q-img v-if="file.type.startsWith('image/')" :src="file.url" class="rounded-8" style="width: 100%;" />

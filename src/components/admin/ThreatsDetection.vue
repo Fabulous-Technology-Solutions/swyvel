@@ -1,22 +1,13 @@
 <template>
   <div class="q-gutter-y-lg">
-    <div class="row items-center">
-      <div class="col">
-        <div class="text-h4 text-bold">Posts Management</div>
-        <div class="text-grey-6 q-mt-sm">
-          Plan, schedule, and track your Posts media content with ease.
-        </div>
+    <div>
+      <div class="text-h4 text-bold">Threat Detection</div>
+      <div class="text-grey-6 q-mt-sm">
+        Monitor, analyze, and respond to potential threats in real-time to protect your brand and community.
       </div>
-      <q-btn
-        no-caps
-        unelevated
-        class="rounded-8"
-        color="primary"
-        icon="add"
-        label="Create New Post"
-        @click="openPostDialog"
-      />
     </div>
+    <StatsCards details="threats" />  
+
     <div class="flex flex-start">
       <q-tabs
         active-class="my-menu-link"
@@ -59,13 +50,13 @@
                       'flex',
                       'items-center',
                       'text-bold',
-                      post.status === 'Scheduled' ? 'text-orange' : 'text-primary',
+                      post.status === 'Medium' ? 'text-orange' : 'text-red',
                     ]"
                   >
                     <IconComp
-                      :icon="post.icon"
+                      icon="si:alert-duotone"
                       class="q-mr-sm"
-                      :color="post.status === 'Scheduled' ? 'orange' : 'blue'"
+                      :color="post.status === 'Medium' ? 'orange' : 'red'"
                       width="24"
                       height="24"
                     />
@@ -88,7 +79,10 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section class="flex items-center cursor-pointer q-py-sm no-wrap" @click="(openPostDialog() ,(post.show = false))">
+                    <q-card-section
+                      class="flex items-center cursor-pointer q-py-sm no-wrap"
+                      @click="(openPostDialog(), (post.show = false))"
+                    >
                       <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
                       <div class="text-grey">Edit</div>
                     </q-card-section>
@@ -117,27 +111,41 @@
                 </div>
               </q-card-section>
 
-              <q-card-section>
+              <q-card-section class="flex justify-between">
                 <div class="flex q-gutter-md">
                   <IconComp
-                    v-for="(social, index) in post.media_social"
                     :key="index"
-                    :icon="social"
+                    :icon="post.platform"
                     width="24"
                     color="orange"
                     height="24"
                   />
+                  <div>
+                    {{post.account}}
+                  </div>
+                </div>
+                <div class="flex q-gutter-sm items-center">
+                    <IconComp
+                    :key="index"
+                    icon="icon-park-twotone:report"
+                    width="24"
+                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    height="24"
+                  />
+                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
+                    {{post.alerts}}
+                  </div>
                 </div>
               </q-card-section>
             </q-card>
           </div>
         </div>
       </q-tab-panel>
-      <q-tab-panel name="schedule">
+      <q-tab-panel name="critical">
         <div class="row gap-12">
           <div
             class="col-4 q-gutter-md"
-            v-for="(post, index) in Posts.filter((post) => post.status === 'Scheduled')"
+            v-for="(post, index) in Posts.filter((post) => post.status === 'Critical')"
             :key="index"
           >
             <!-- post content here -->
@@ -150,13 +158,13 @@
                       'flex',
                       'items-center',
                       'text-bold',
-                      post.status === 'Scheduled' ? 'text-orange' : 'text-primary',
+                      post.status === 'Critical' ? 'text-red' : 'text-orange',
                     ]"
                   >
                     <IconComp
-                      :icon="post.icon"
+                      icon="si:alert-duotone"
                       class="q-mr-sm"
-                      :color="post.status === 'Scheduled' ? 'orange' : 'blue'"
+                      :color="post.status === 'Critical' ? 'red' : 'orange'"
                       width="24"
                       height="24"
                     />
@@ -176,7 +184,10 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section class="flex items-center cursor-pointer q-py-sm no-wrap" @click="(openPostDialog() ,(post.show = false))">
+                    <q-card-section
+                      class="flex items-center cursor-pointer q-py-sm no-wrap"
+                      @click="(openPostDialog(), (post.show = false))"
+                    >
                       <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
                       <div class="text-grey">Edit</div>
                     </q-card-section>
@@ -205,27 +216,41 @@
                 </div>
               </q-card-section>
 
-              <q-card-section>
+              <q-card-section class="flex justify-between">
                 <div class="flex q-gutter-md">
                   <IconComp
-                    v-for="(social, index) in post.media_social"
                     :key="index"
-                    :icon="social"
+                    :icon="post.platform"
                     width="24"
                     color="orange"
                     height="24"
                   />
+                  <div>
+                    {{post.account}}
+                  </div>
+                </div>
+                <div class="flex q-gutter-sm items-center">
+                    <IconComp
+                    :key="index"
+                    icon="icon-park-twotone:report"
+                    width="24"
+                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    height="24"
+                  />
+                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
+                    {{post.alerts}}
+                  </div>
                 </div>
               </q-card-section>
             </q-card>
           </div>
         </div>
       </q-tab-panel>
-      <q-tab-panel name="published">
+      <q-tab-panel name="high risk">
         <div class="row gap-12">
           <div
             class="col-4 q-gutter-md"
-            v-for="(post, index) in Posts.filter((post) => post.status === 'Published')"
+            v-for="(post, index) in Posts.filter((post) => post.status === 'High Risk')"
             :key="index"
           >
             <!-- post content here -->
@@ -238,13 +263,13 @@
                       'flex',
                       'items-center',
                       'text-bold',
-                      post.status === 'Scheduled' ? 'text-orange' : 'text-primary',
+                      post.status === 'high risk' ? 'text-red' : 'text-orange',
                     ]"
                   >
                     <IconComp
-                      :icon="post.icon"
+                      icon="si:alert-duotone"
                       class="q-mr-sm"
-                      :color="post.status === 'Scheduled' ? 'orange' : 'blue'"
+                      :color="post.status === 'high risk' ? 'red' : 'orange'"
                       width="24"
                       height="24"
                     />
@@ -264,7 +289,10 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section class="flex items-center cursor-pointer q-py-sm no-wrap" @click="(openPostDialog() ,(post.show = false))">
+                    <q-card-section
+                      class="flex items-center cursor-pointer q-py-sm no-wrap"
+                      @click="(openPostDialog(), (post.show = false))"
+                    >
                       <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
                       <div class="text-grey">Edit</div>
                     </q-card-section>
@@ -293,32 +321,46 @@
                 </div>
               </q-card-section>
 
-              <q-card-section>
+              <q-card-section class="flex justify-between">
                 <div class="flex q-gutter-md">
                   <IconComp
-                    v-for="(social, index) in post.media_social"
                     :key="index"
-                    :icon="social"
+                    :icon="post.platform"
                     width="24"
                     color="orange"
                     height="24"
                   />
+                  <div>
+                    {{post.account}}
+                  </div>
+                </div>
+                <div class="flex q-gutter-sm items-center">
+                    <IconComp
+                    :key="index"
+                    icon="icon-park-twotone:report"
+                    width="24"
+                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    height="24"
+                  />
+                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
+                    {{post.alerts}}
+                  </div>
                 </div>
               </q-card-section>
             </q-card>
           </div>
         </div>
       </q-tab-panel>
-      <q-tab-panel name="draft">
+      <q-tab-panel name="medium">
         <div class="row gap-12">
-          <div class="col-4 q-gutter-md" v-for="(post, index) in drafts" :key="index">
+          <div class="col-4 q-gutter-md" v-for="(post, index) in medium" :key="index">
             <!-- post content here -->
             <q-card flat class="border rounded-20" style="position: relative">
               <q-card-section class="row">
                 <div class="col-6">
                   <div :class="['font-14', 'flex', 'items-center', 'text-bold', 'text-grey']">
                     <IconComp
-                      :icon="post.icon"
+                      icon="si:alert-duotone"
                       class="q-mr-sm"
                       color="grey"
                       width="24"
@@ -340,13 +382,16 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section class="flex items-center cursor-pointer q-py-sm no-wrap" @click="(openPostDialog() ,(post.show = false))">
+                    <q-card-section
+                      class="flex items-center cursor-pointer q-py-sm no-wrap"
+                      @click="(openPostDialog(), (post.show = false))"
+                    >
                       <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
                       <div class="text-grey">Edit</div>
                     </q-card-section>
                     <q-card-section
                       class="flex items-center cursor-pointer q-py-sm no-wrap"
-                       @click="(openDeleteDialog(), (post.show = false))"
+                      @click="(openDeleteDialog(), (post.show = false))"
                     >
                       <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
                       <div class="text-red">Delete</div>
@@ -369,16 +414,30 @@
                 </div>
               </q-card-section>
 
-              <q-card-section>
+              <q-card-section class="flex justify-between">
                 <div class="flex q-gutter-md">
                   <IconComp
-                    v-for="(social, index) in post.media_social"
                     :key="index"
-                    :icon="social"
+                    :icon="post.platform"
                     width="24"
                     color="orange"
                     height="24"
                   />
+                  <div>
+                    {{post.account}}
+                  </div>
+                </div>
+                <div class="flex q-gutter-sm items-center">
+                    <IconComp
+                    :key="index"
+                    icon="icon-park-twotone:report"
+                    width="24"
+                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    height="24"
+                  />
+                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
+                    {{post.alerts}}
+                  </div>
                 </div>
               </q-card-section>
             </q-card>
@@ -453,7 +512,7 @@
         </q-card-actions>
       </q-card>
     </q-dialog> -->
-    <CreatePostDialog ref="createPost" />
+    <!-- <CreatePostDialog ref="createPost" /> -->
     <DeleteDialog ref="deleteDialog" />
   </div>
 </template>
@@ -461,11 +520,12 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import DeleteDialog from 'src/components/common/dialogs/DeleteDialog.vue'
-import CreatePostDialog from 'src/components/common/dialogs/CreatePostDialog.vue'
+import StatsCards from 'src/components/super-admin/StatsCards.vue'
+// import CreatePostDialog from 'src/components/common/dialogs/CreatePostDialog.vue'
 const tab = ref('post')
 const createPost = ref(null)
 const deleteDialog = ref(null)
-const openPostDialog = ()=>{
+const openPostDialog = () => {
   createPost.value.showDialog()
 }
 const openDeleteDialog = () => {
@@ -475,150 +535,124 @@ const openDeleteDialog = () => {
 const alltabs = reactive([
   {
     name: 'post',
-    label: 'All Posts',
+    label: 'All',
     icon: 'fluent-mdl2:post-update',
   },
   {
-    name: 'schedule',
-    label: 'Scheduled',
-    icon: 'mage:clock',
+    name: 'critical',
+    label: 'Critical',
+    icon: 'si:alert-duotone',
   },
   {
-    name: 'published',
-    label: 'Published',
-    icon: 'solar:check-circle-linear',
+    name: 'high risk',
+    label: 'High Risk',
+    icon: 'si:alert-duotone',
   },
   {
-    name: 'draft',
-    label: 'Draft',
-    icon: 'fluent:drafts-16-regular',
+    name: 'medium',
+    label: 'Medium',
+    icon: 'si:alert-duotone',
   },
 ])
-const drafts = reactive([
+const medium = reactive([
   {
-    title: 'Facebook',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:instagram',
-      'logos:pinterest',
-      'fa:snapchat-square',
-    ],
-    status: 'Drafts',
+    account: '@HealthTipsDaily',
+    platform: 'devicon:facebook',
+    status: 'Medium',
     show: false,
+    alerts:'Hate Speech Alert'
   },
   {
-    title: 'Twitter',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:instagram',
-      'logos:pinterest',
-      'fa:snapchat-square',
-    ],
-    status: 'Drafts',
+    account: '@HealthTipsDaily',
+    platform: 'skill-icons:twitter',
+    status: 'Medium',
     show: false,
+    alerts:'Hate Speech Alert'
   },
 ])
 const Posts = reactive([
   {
-    title: 'Facebook',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:instagram',
-      'logos:pinterest',
-      'fa:snapchat-square',
-    ],
-    status: 'Scheduled',
+    platform: 'skill-icons:instagram',
+    status: 'Hight Risk',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Hate Speech Alert'
   },
   {
-    title: 'Twitter',
-    icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:instagram',
-      'logos:pinterest',
-      'fa:snapchat-square',
-    ],
-    status: 'Published',
+    platform: 'skill-icons:linkedin',
+    status: 'Critical',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Hate Speech Alert'
   },
   {
-    title: 'Instagram',
-    icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: ['devicon:facebook', 'fa:snapchat-square'],
-    status: 'Scheduled',
+    platform: 'logos:youtube-icon',
+    status: 'High Risk',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Phishing Scam'
   },
   {
     title: 'LinkedIn',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: ['devicon:facebook', 'skill-icons:instagram', 'fa:snapchat-square'],
-    status: 'Published',
+    platform: 'logos:tiktok-icon',
+    status: 'Medium',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Hate Speech Alert'
   },
   {
     title: 'TikTok',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:instagram',
-      'logos:pinterest',
-      'fa:snapchat-square',
-    ],
-    status: 'Published',
+    platform: 'devicon:facebook',
+    status: 'Critical',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Phishing Scam'
   },
   {
     title: 'YouTube',
-    icon: 'solar:clock-circle-linear',
+    // icon: 'solar:clock-circle-linear',
     time: 'Mar 10, 2025 12:23 pm',
     img: 'https://s3-alpha-sig.figma.com/img/9d2b/45ce/f10698a7fa34cab9a25fddedb351cb3a?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=n7c-fsZU3NI5NoUX5s2-rzej5PbJzMbsd2s0~ubPseOKeAqtncwSBx509SrbTndWnx5dhYhmKb~dYVpk0Uv2qzcadzF7cSTVqlOgEUTrn~O6cYYIxJQjqdloFlsjHiyQ7d0BiV0WPUGms-1l8-Hg1dwanlfj1WC9D4UVUvPsY0-2sxC4ymknGZGSPUvPlhQK2xPbS1Ij91FLC5WquaZem8qyiSLoVs6MkbP9~7YSH~fY4nwlZlnEznzJ7KlNq23mRf7DTsNJ39qJD1jCZK89fDNIcqCFACUOC3hykG2g8ViOR54VFRsrvJFW8JiWK3Ow-BVoJvdSWEAxEBruGZ-qKA__',
     description: 'Sed molestie pulvinar sem, a convallis turpis convallis ullamcorper.',
     tags: ['#Tag', '#Tag', '#Tag', '#Tag'],
-    media_social: [
-      'devicon:facebook',
-      'skill-icons:twitter',
-      'skill-icons:instagram',
-      'skill-icons:linkedin',
-      'logos:tiktok-icon',
-      'logos:pinterest',
-      'logos:pinterest',
-      'logos:reddit-icon',
-      'fa:snapchat-square',
-    ],
-    status: 'Scheduled',
+    platform: 'devicon:facebook',
+    status: 'High Risk',
+    account: '@HealthTipsDaily',
     show: false,
+    alerts:'Hate Speech Alert'
   },
 ])
 </script>

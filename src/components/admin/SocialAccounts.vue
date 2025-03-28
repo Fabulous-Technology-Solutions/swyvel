@@ -16,7 +16,7 @@
             </div>
             <div class="col-6 flex item-start justify-end gap-12">
               <IconComp
-                icon="openmoji:delete"
+                icon="mdi-light:delete"
                 v-if="platform.permit"
                 color="red"
                 width="24"

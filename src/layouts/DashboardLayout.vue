@@ -298,14 +298,14 @@ const security = [
   {
     title: 'Misinformation Detection',
     icon: 'line-md:alert-twotone',
-    name: 'misinformation',
-    to: '#',
+    name: 'miss-information',
+    to: '/dashboard/miss-information',
   },
   {
     title: 'Threat Detection',
     icon: 'duo-icons:alert-octagon',
-    name: 'threads',
-    to: '#',
+    name: 'threats',
+    to: '/dashboard/threats',
   },
 ]
 
