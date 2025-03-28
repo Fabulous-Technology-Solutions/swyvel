@@ -17,7 +17,7 @@
         />
       </div>
       <div class="col">
-        <PieChart
+        <SubscriptionPieChart
           title="Revenue Breakdown by Subscription Plan"
           :labels="['Premium Plan', 'Standard Plan', 'Basic Plan']"
           :series="[40, 30, 30]"
@@ -39,7 +39,7 @@
 import { ref } from 'vue'
 import StatsCards from 'src/components/super-admin/StatsCards.vue'
 import AreaGraph from 'src/components/common/AreaGraph.vue'
-import PieChart from 'src/components/common/PieChart.vue'
+import SubscriptionPieChart from 'src/components/super-admin/SubscriptionPieChart.vue'
 
 const growthSeries = ref([
   {
