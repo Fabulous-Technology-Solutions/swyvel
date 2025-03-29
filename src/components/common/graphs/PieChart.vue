@@ -27,7 +27,7 @@ const chartOptions = ref ({
   },
   labels:props.labels,
   colors: props.colors,
-  legend: { show: true, position: 'bottom', fontWeight: 'bold',},
+  legend: { show: true, position: 'bottom', fontWeight: 'bold', fontFamily: 'Inter, sans-serif',},
   series:[60, 20, 20],
   tooltip: {
     enabled: false,
@@ -38,8 +38,8 @@ const chartOptions = ref ({
     formatter: (val) => `${Math.round(val)}%`,
     style: {
       fontSize: '12px',
+      fontFamily: 'Inter, sans-serif',
     },
-
   },
   plotOptions: {
     pie: {
@@ -61,5 +61,8 @@ const chartOptions = ref ({
 }
 .apexcharts-legend-marker svg {
   border-radius: 50% !important;
+}
+.apexcharts-legend {
+  justify-content: space-around !important;
 }
 </style>

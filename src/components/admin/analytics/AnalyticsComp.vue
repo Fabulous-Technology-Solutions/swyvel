@@ -38,25 +38,45 @@
         <ChannelStatFilters />
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import StatCard from 'src/components/common/cards/StatCard.vue';
-import AgeGroup from 'src/components/admin/analytics/AgeGroup.vue';
-import EngagementRateOvertime from 'src/components/admin/analytics/EngagementRateOvertime.vue';
-import PieChart from 'src/components/common/PieChart.vue'
-import ChannelStatFilters from 'src/components/admin/analytics/ChannelStatFilters.vue';
+import { ref } from 'vue'
+import StatCard from 'src/components/common/cards/StatCard.vue'
+import AgeGroup from 'src/components/common/AgeGroup.vue'
+import EngagementRateOvertime from 'src/components/admin/analytics/EngagementRateOvertime.vue'
+import PieChart from 'src/components/common/graphs/PieChart.vue'
+import ChannelStatFilters from 'src/components/admin/analytics/ChannelStatFilters.vue'
 
 const stats = ref([
-  { title: 'Total Engagements', count: '2.4 M', growthPercent: '10%', growth: 'low', engText: 'vs last month'},
-  { title: 'Total Reach', count: '316 M', growthPercent: '20%', growth: 'high', engText: 'vs last month'},
-  { title: 'Total Impressions', count: '700 M', growthPercent: '20%', growth: 'high', engText: 'vs last month'},
-  { title: 'Average Engagement Rate', percent: '5.2', growthPercent: '20%', growth: 'high', engText: 'vs last month'},
+  {
+    title: 'Total Engagements',
+    count: '2.4 M',
+    growthPercent: '10%',
+    growth: 'low',
+    engText: 'vs last month',
+  },
+  {
+    title: 'Total Reach',
+    count: '316 M',
+    growthPercent: '20%',
+    growth: 'high',
+    engText: 'vs last month',
+  },
+  {
+    title: 'Total Impressions',
+    count: '700 M',
+    growthPercent: '20%',
+    growth: 'high',
+    engText: 'vs last month',
+  },
+  {
+    title: 'Average Engagement Rate',
+    percent: '5.2',
+    growthPercent: '20%',
+    growth: 'high',
+    engText: 'vs last month',
+  },
 ])
-
-
 </script>
-

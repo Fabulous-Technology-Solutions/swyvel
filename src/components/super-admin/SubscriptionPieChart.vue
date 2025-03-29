@@ -1,5 +1,5 @@
 <template>
-  <q-card flat class="rounded-8 border q-pa-md">
+  <q-card flat class="rounded-8 q-pa-md">
     <div class="flex justify-between items-center q-pb-xs">
       <div class="text-h6 text-weight-600 full-width q-pb-lg" style="border-bottom: 1px solid #D5D7DA;">{{ props.title }}</div>
       <div class="q-mt-md" ></div>

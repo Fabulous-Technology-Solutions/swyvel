@@ -51,6 +51,18 @@ const routes = [
             name:'analytics',
             component: () => import('src/components/admin/analytics/AnalyticsComp.vue')
           },
+          { path: 'ai-insights',
+            name:'ai-driven',
+            component: () => import('src/components/admin/insights/AiInsights.vue')
+          },
+          { path: 'ai-insights',
+            name:'ai-driven',
+            component: () => import('src/components/admin/insights/AiInsights.vue')
+          },
+          { path: 'audience-analysis',
+            name:'audience',
+            component: () => import('src/components/admin/analysis/AudienceAnalysis.vue')
+          },
           {
             path: 'social-accounts',
             name: 'social',
