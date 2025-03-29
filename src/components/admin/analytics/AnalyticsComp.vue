@@ -46,7 +46,7 @@ import { ref } from 'vue'
 import StatCard from 'src/components/common/cards/StatCard.vue'
 import AgeGroup from 'src/components/common/AgeGroup.vue'
 import EngagementRateOvertime from 'src/components/admin/analytics/EngagementRateOvertime.vue'
-import PieChart from 'src/components/common/PieChart.vue'
+import PieChart from 'src/components/common/graphs/PieChart.vue'
 import ChannelStatFilters from 'src/components/admin/analytics/ChannelStatFilters.vue'
 
 const stats = ref([

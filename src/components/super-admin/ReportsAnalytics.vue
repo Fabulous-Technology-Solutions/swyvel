@@ -8,13 +8,9 @@
       </div>
     </div>
     <StatsCards />
-    <div class="row q-gutter-x-lg ">
+    <div class="row q-gutter-x-lg">
       <div class="col">
-        <AreaGraph
-          :series="growthSeries"
-          :color="['#2F5CEF']"
-          title="User Growth Over Time"
-        />
+        <AreaGraph :series="growthSeries" :color="['#2F5CEF']" title="User Growth Over Time" />
       </div>
       <div class="col border rounded-8">
         <SubscriptionPieChart
@@ -26,11 +22,7 @@
       </div>
     </div>
     <div class="">
-      <AreaGraph
-        :series="revenueSeries"
-        :color="['#D6AE51']"
-        title="Revenue Breakdown"
-      />
+      <AreaGraph :series="revenueSeries" :color="['#D6AE51']" title="Revenue Breakdown" />
     </div>
   </div>
 </template>
@@ -38,7 +30,7 @@
 <script setup>
 import { ref } from 'vue'
 import StatsCards from 'src/components/super-admin/StatsCards.vue'
-import AreaGraph from 'src/components/common/AreaGraph.vue'
+import AreaGraph from 'src/components/common/graphs/AreaGraph.vue'
 import SubscriptionPieChart from 'src/components/super-admin/SubscriptionPieChart.vue'
 
 const growthSeries = ref([
@@ -48,13 +40,10 @@ const growthSeries = ref([
   },
 ])
 
-
 const revenueSeries = ref([
   {
     name: 'Revenue Breakdown',
     data: [300, 320, 320, 340, 300, 360, 370, 380, 390, 380, 400, 420],
   },
 ])
-
-
 </script>

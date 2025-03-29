@@ -8,14 +8,20 @@
     </div>
     <StatsCards />
     <AreaGraph :series="series" :color="['#2F5CEF']" title="Revenue Overview" />
-    <BaseTable title="New Users" tableFor="users" :columns="columns" :rows="rows" :pagination = "false"  />
+    <BaseTable
+      title="New Users"
+      tableFor="users"
+      :columns="columns"
+      :rows="rows"
+      :pagination="false"
+    />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import StatsCards from 'src/components/super-admin/StatsCards.vue'
-import AreaGraph from 'src/components/common/AreaGraph.vue'
+import AreaGraph from 'src/components/common/graphs/AreaGraph.vue'
 
 const series = ref([
   {

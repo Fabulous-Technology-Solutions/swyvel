@@ -4,11 +4,22 @@
       <div>
         <div class="text-h4 text-bold">AI-Driven Insights</div>
         <div class="text-grey-6 q-mt-sm">
-          Harness the power of AI to uncover patterns, trends, and actionable insights for smarter decision-making.
+          Harness the power of AI to uncover patterns, trends, and actionable insights for smarter
+          decision-making.
         </div>
       </div>
-      <q-btn flat  no-caps  class="border rounded-8 text-grey-7 flex items-center" style="height: 40px">
-        <IconComp icon="solar:download-linear"  width="16px" height="16px" class="q-mr-sm text-grey-7" />
+      <q-btn
+        flat
+        no-caps
+        class="border rounded-8 text-grey-7 flex items-center"
+        style="height: 40px"
+      >
+        <IconComp
+          icon="solar:download-linear"
+          width="16px"
+          height="16px"
+          class="q-mr-sm text-grey-7"
+        />
         <span> Download Report </span>
       </q-btn>
     </div>
@@ -48,18 +59,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import StatCard from 'src/components/common/cards/StatCard.vue';
-import PieChart from 'src/components/common/PieChart.vue'
-import OvertimeAreaGraph from 'src/components/common/OvertimeAreaGraph.vue';
-import PredictiveAccuracy from 'src/components/admin/insights/PredictiveAccuracy.vue';
+import { ref } from 'vue'
+import StatCard from 'src/components/common/cards/StatCard.vue'
+import PieChart from 'src/components/common/graphs/PieChart.vue'
+import OvertimeAreaGraph from 'src/components/common/graphs/OvertimeAreaGraph.vue'
+import PredictiveAccuracy from 'src/components/admin/insights/PredictiveAccuracy.vue'
 
 const stats = ref([
-  { title: 'Total AI-Generated Reports', count: '5,320', growthPercent: '40%', growth: 'high', engText: 'Since last month'},
-  { title: 'Anomalies Detected', count: '1,230', growthPercent: '10%', growth: 'low', engText: 'Unusual Patterns Identified'},
-  { title: 'Predictive Accuracy', percent: '92.5', growthPercent: '20%', growth: 'high', engText: 'Compared to Last Quarter'},
-  { title: 'Sentiment Analysis Score', percent: '78', growthPercent: '20%', growth: 'high', engText: 'Overall User Sentiment'},
+  {
+    title: 'Total AI-Generated Reports',
+    count: '5,320',
+    growthPercent: '40%',
+    growth: 'high',
+    engText: 'Since last month',
+  },
+  {
+    title: 'Anomalies Detected',
+    count: '1,230',
+    growthPercent: '10%',
+    growth: 'low',
+    engText: 'Unusual Patterns Identified',
+  },
+  {
+    title: 'Predictive Accuracy',
+    percent: '92.5',
+    growthPercent: '20%',
+    growth: 'high',
+    engText: 'Compared to Last Quarter',
+  },
+  {
+    title: 'Sentiment Analysis Score',
+    percent: '78',
+    growthPercent: '20%',
+    growth: 'high',
+    engText: 'Overall User Sentiment',
+  },
 ])
-
 </script>
-

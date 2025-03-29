@@ -64,8 +64,8 @@
 <script setup>
 import { ref } from 'vue'
 import StatCard from 'src/components/common/cards/StatCard.vue'
-import PieChart from 'src/components/common/PieChart.vue'
-import OvertimeAreaGraph from 'src/components/common/OvertimeAreaGraph.vue'
+import PieChart from 'src/components/common/graphs/PieChart.vue'
+import OvertimeAreaGraph from 'src/components/common/graphs/OvertimeAreaGraph.vue'
 import AgeGroup from 'src/components/common/AgeGroup.vue'
 
 const stats = ref([
