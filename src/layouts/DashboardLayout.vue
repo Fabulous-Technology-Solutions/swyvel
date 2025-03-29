@@ -314,13 +314,13 @@ const insights = [
     title: 'AI-Driven Insights',
     icon: 'carbon:analytics',
     name: 'ai-driven',
-    to: '#',
+    to: '/dashboard/ai-insights',
   },
   {
     title: 'Audience Analysis',
     icon: 'ph:users-three-duotone',
     name: 'audience',
-    to: '#',
+    to: '/dashboard/audience-analysis',
   },
 ]
 

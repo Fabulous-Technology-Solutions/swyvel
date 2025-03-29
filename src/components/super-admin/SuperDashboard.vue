@@ -7,7 +7,7 @@
       </div>
     </div>
     <StatsCards />
-    <GraphComp :series="series" :chartOptions="chartOptions" title="Revenue Overview" />
+    <AreaGraph :series="series" :chartOptions="chartOptions" title="Revenue Overview" />
     <BaseTable title="New Users" tableFor="users" :columns="columns" :rows="rows" :pagination = "false"  />
   </div>
 </template>
@@ -15,7 +15,7 @@
 <script setup>
 import { ref } from 'vue'
 import StatsCards from 'src/components/super-admin/StatsCards.vue'
-import GraphComp from 'src/components/common/AreaGraph.vue'
+import AreaGraph from 'src/components/common/AreaGraph.vue'
 
 const series = ref([
   {
@@ -38,6 +38,7 @@ const chartOptions = ref({
   },
   stroke: {
     curve: 'smooth',
+    width: 3,
   },
   xaxis: {
     categories: [
