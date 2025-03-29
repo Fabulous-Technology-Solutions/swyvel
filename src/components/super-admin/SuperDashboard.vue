@@ -7,7 +7,7 @@
       </div>
     </div>
     <StatsCards />
-    <AreaGraph :series="series" :chartOptions="chartOptions" title="Revenue Overview" />
+    <AreaGraph :series="series" :color="['#2F5CEF']" title="Revenue Overview" />
     <BaseTable title="New Users" tableFor="users" :columns="columns" :rows="rows" :pagination = "false"  />
   </div>
 </template>
@@ -19,58 +19,10 @@ import AreaGraph from 'src/components/common/AreaGraph.vue'
 
 const series = ref([
   {
-    name: 'Revenue',
+    name: 'Revenue Overview',
     data: [300, 320, 320, 340, 300, 360, 370, 380, 390, 380, 400, 420],
   },
 ])
-
-const chartOptions = ref({
-  chart: {
-    type: 'area',
-    height: 350,
-    toolbar: {
-      show: false,
-    },
-  },
-  colors: ['#2F5CEF'],
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: 'smooth',
-    width: 3,
-  },
-  xaxis: {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
-    labels: {
-      style: {
-        fontFamily: 'Inter, sans-serif',
-      },
-    },
-  },
-  yaxis: {
-    min: 100,
-    max: 600,
-    show: false,
-  },
-  fill: {
-    type: 'solid',
-    opacity: 0.05,
-  },
-})
 
 import BaseTable from 'src/components/common/BaseTable.vue'
 

@@ -18,14 +18,13 @@
         <OvertimeAreaGraph title="Engagement Trends Over Time" />
       </div>
       <div class="col border rounded-16">
-        <!-- <PieChart
+        <PieChart
           type="donut"
           title="Sentiment Analysis"
           :series="[25, 40, 35]"
           :labels="['Positive', 'Neutral', 'Negative']"
           :colors="['#007bff', '#bfbfbf', '#8c8c8c']"
-        /> -->
-        <PolarAreaGraph />
+        />
       </div>
     </div>
     <div class="row q-gutter-x-lg">
@@ -54,7 +53,6 @@ import StatCard from 'src/components/common/cards/StatCard.vue';
 import PieChart from 'src/components/common/PieChart.vue'
 import OvertimeAreaGraph from 'src/components/common/OvertimeAreaGraph.vue';
 import PredictiveAccuracy from 'src/components/admin/insights/PredictiveAccuracy.vue';
-import PolarAreaGraph from 'src/components/common/PolarAreaGraph.vue';
 
 const stats = ref([
   { title: 'Total AI-Generated Reports', count: '5,320', growthPercent: '40%', growth: 'high', engText: 'Since last month'},

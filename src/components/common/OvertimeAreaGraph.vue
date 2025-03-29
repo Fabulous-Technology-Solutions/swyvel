@@ -22,7 +22,7 @@ import { ref } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
 
 const props = defineProps({
-  title: { type: String, required: true},
+  title: { type: String, required: true },
 })
 const durationFilters = ref([
   { label: 'Last 7 days', value: '7' },
@@ -33,11 +33,10 @@ const selectedDuration = ref(durationFilters.value[0])
 
 const series = ref([
   {
-    name: "Engagement",
+    name: 'Engagement',
     data: [0, 18, 10, 30, 20, 28, 15],
   },
 ])
-
 
 const chartOptions = ref({
   chart: {
@@ -55,16 +54,8 @@ const chartOptions = ref({
     width: 2,
   },
   xaxis: {
-    categories: [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ],
-    labels: { style: { colors: '#1C1C1C66', fontSize: '12px' } },
+    categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    labels: { style: { colors: '#1C1C1C66', fontSize: '12px', fontFamily: 'Inter, sans-serif', } },
   },
   yaxis: {
     min: 0,
@@ -72,23 +63,23 @@ const chartOptions = ref({
     labels: {
       formatter: (val) => `${val}%`,
       style: {
-        colors: "#1C1C1C66",
+        colors: '#1C1C1C66',
+        fontFamily: 'Inter, sans-serif',
       },
     },
   },
   fill: {
-  type: 'gradient',
-  gradient: {
-    shade: 'light',
-    type: 'vertical',
-    shadeIntensity: 0.4,
-    gradientToColors: ['#2F5CEF'],
-    inverseColors: false,
-    opacityFrom: 0.5,
-    opacityTo: 0.02,
-    stops: [0, 100],
+    type: 'gradient',
+    gradient: {
+      shade: 'light',
+      type: 'vertical',
+      shadeIntensity: 0.4,
+      gradientToColors: ['#2F5CEF'],
+      inverseColors: false,
+      opacityFrom: 0.5,
+      opacityTo: 0.02,
+      stops: [0, 100],
+    },
   },
-},
 })
-
 </script>
