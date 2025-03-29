@@ -91,7 +91,6 @@ async function drawMap() {
       const countryExists = Object.values(countryData.value).some(
         (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
       )
-     console.log(world, "testing")
       // Return orange if country exists in your data, black otherwise
       return countryExists ? '#D6AE51' : '#D9D9D9'
     })
