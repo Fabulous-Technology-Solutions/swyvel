@@ -1,7 +1,7 @@
 <template>
   <q-card class="map-card no-shadow">
     <q-card-section>
-      <div ref="mapContainer" class="map-container"></div>
+      <div ref="mapContainer" class="map-container full-width"></div>
     </q-card-section>
   </q-card>
 </template>
@@ -11,18 +11,75 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as d3 from 'd3'
 import { feature } from 'topojson-client'
 
+const props = defineProps({
+  details: String,
+})
 const mapContainer = ref(null)
+const countryData = ref([])
+const missInfo = ref([])
+const highEngage = ref([])
+if (props.details === 'ai-insights') {
+  countryData.value = [
+    { name: 'United States', rate: '78.5%' },
+    { name: 'United Kingdom', rate: '45.8%' },
+    { name: 'Canada', rate: '40.5%' },
+    { name: 'Autralia', rate: '50.1%' },
+    { name: 'Brazil', rate: '68.5%' },
+    { name: 'Russia', rate: '89.2%' },
+    { name: 'Greenland', rate: '89.2%' },
+    { name: 'United States Of America', rate: '89.2%' },
+    { name: 'Mexico', rate: '89.2%' },
+    { name: 'Colombia', rate: '89.2%' },
+    { name: 'Venezuela', rate: '89.2%' },
+    { name: 'Argentina', rate: '89.2%' },
+    { name: 'Peru', rate: '89.2%' },
+    { name: 'Chile', rate: '89.2%' },
+    { name: 'Ecuador', rate: '89.2%' },
+    { name: 'Bolivia', rate: '89.2%' },
+    { name: 'Australia', rate: '89.2%' },
+    { name: 'Niger', rate: '89.2%' },
+    { name: 'Algeria', rate: '89.2%' },
+  ]
+} else if (props.details === 'audience-Analysis') {
+  countryData.value = [
+   { name: 'Niger', rate: '89.2%' },
+    { name: 'Algeria', rate: '89.2%' },
+    { name: 'United States Of America', rate: '89.2%' },
 
-const countryData = ref([
-  { name: 'United States', rate: '78.5%' },
-  { name: 'United Kingdom', rate: '45.8%' },
-  { name: 'Canada', rate: '40.5%' },
-  { name: 'Autralia', rate: '50.1%' },
-  { name: 'India', rate: '30.5%' },
-  { name: 'China', rate: '25.5%' },
-  { name: 'Brazil', rate: '68.5%' },
-  { name: 'South Africa', rate: '89.2%' },
-])
+  ]
+  missInfo.value = [
+    { name: 'United States', rate: '78.5%' },
+    { name: 'United Kingdom', rate: '45.8%' },
+    { name: 'India', rate: '30.5%' },
+    { name: 'Russia', rate: '25.5%' },
+    { name: 'GreenLand', rate: '25.5%' },
+    { name: 'Argentina', rate: '25.5%' },
+    { name: 'Mexico', rate: '89.2%' },
+  ]
+  highEngage.value = [
+    { name: 'Autralia', rate: '50.1%' },
+    { name: 'China', rate: '25.5%' },
+    { name: 'Canada', rate: '90.5%' },
+    { name: 'Brazil', rate: '68.5%' },
+    { name: 'South Africa', rate: '89.2%' },
+    { name: 'Libia', rate: '89.2%' },
+    { name: 'Egypt', rate: '89.2%' },
+    { name: 'Sudan', rate: '89.2%' },
+    { name: 'South Africa', rate: '89.2%' },
+
+  ]
+} else {
+  countryData.value = [
+    { name: 'United States', rate: '78.5%' },
+    { name: 'United Kingdom', rate: '45.8%' },
+    { name: 'Canada', rate: '40.5%' },
+    { name: 'Autralia', rate: '50.1%' },
+    { name: 'India', rate: '30.5%' },
+    { name: 'China', rate: '25.5%' },
+    { name: 'Brazil', rate: '68.5%' },
+    { name: 'South Africa', rate: '89.2%' },
+  ]
+}
 
 // Color scale
 // const colorScale = d3
@@ -88,11 +145,35 @@ async function drawMap() {
     .attr('id', (d) => d.id)
     .attr('fill', (d) => {
       // Find if this country exists in your data
-      const countryExists = Object.values(countryData.value).some(
-        (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
-      )
-      // Return orange if country exists in your data, black otherwise
-      return countryExists ? '#D6AE51' : '#D9D9D9'
+      if (props.details === 'audience-Analysis') {
+        // if(missInfo.value.length > 0) {
+        const missInfoExist = Object.values(missInfo.value).some(
+          (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
+        )
+        const countryExists = Object.values(countryData.value).some(
+          (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
+        )
+        //   return missInfoExist ? 'blue' : '#D9D9D9'
+        // }else if(highEngage.value.length > 0) {
+        const highEngageExist = Object.values(highEngage.value).some(
+          (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
+        )
+        if (highEngageExist) return '#2F5CEF' // Blue
+
+        if (missInfoExist) return '#CB1F27' // Red
+
+        if (countryExists) return '#D6AE51' // Gold
+
+        // 4. Default color for all other countries
+        return '#D9D9D9'
+        // }
+      } else {
+        const countryExists = Object.values(countryData.value).some(
+          (country) => country.name.toLowerCase() === d.properties.name?.toLowerCase(),
+        )
+        // Return orange if country exists in your data, black otherwise
+        return countryExists ? '#D6AE51' : '#D9D9D9'
+      }
     })
     .attr('stroke', '#fff')
     .attr('stroke-width', 0.5)

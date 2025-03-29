@@ -40,7 +40,13 @@
     </div>
     <div class="row q-gutter-x-lg">
       <div class="col border rounded-16">
-        <AgeGroup />
+        <HeatMap details="ai-insights" />
+        <div class="flex q-pa-md q-gutter-md items-center">
+           <q-badge rounded style="background-color:#D6AE51; " />
+           <div>
+            2,500 suspicious accounts detected engaging with recent ads
+           </div>
+        </div>
       </div>
       <div class="col-3 border rounded-16">
         <PredictiveAccuracy />
@@ -64,6 +70,7 @@ import StatCard from 'src/components/common/cards/StatCard.vue'
 import PieChart from 'src/components/common/graphs/PieChart.vue'
 import OvertimeAreaGraph from 'src/components/common/graphs/OvertimeAreaGraph.vue'
 import PredictiveAccuracy from 'src/components/admin/insights/PredictiveAccuracy.vue'
+import HeatMap from 'src/components/admin/overview/HeatMap.vue'
 
 const stats = ref([
   {

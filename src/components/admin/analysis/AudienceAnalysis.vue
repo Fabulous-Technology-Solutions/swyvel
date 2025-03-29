@@ -25,7 +25,29 @@
       <div class="col-6 border rounded-16">
         <OvertimeAreaGraph title="Audience Growth Over Time" />
       </div>
-      <div class="col border rounded-16"></div>
+      <div class="col border rounded-16">
+        <HeatMap details="audience-Analysis" />
+        <div class="row">
+          <div class="col-6  q-pa-md">
+            <div class="flex  q-gutter-md items-center">
+              <q-badge rounded color="primary" />
+              <div>High-Engagement Regions</div>
+            </div>
+          </div>
+          <div class="col-6  q-pa-md  ">
+            <div class="flex q-gutter-md items-center">
+              <q-badge rounded style="background-color: #d6ae51" />
+              <div>Neutral / Mixed Sentiment Zones</div>
+            </div>
+          </div>
+          <div class="col-12  q-pa-md ">
+            <div class="flex  q-gutter-md  items-center">
+              <q-badge rounded style="background-color: #CB1F27" />
+              <div class="elipsis">Misinformation & Negative Sentiment Hotspots</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row q-gutter-x-lg">
       <div class="col-4 border rounded-16">
@@ -67,6 +89,7 @@ import StatCard from 'src/components/common/cards/StatCard.vue'
 import PieChart from 'src/components/common/graphs/PieChart.vue'
 import OvertimeAreaGraph from 'src/components/common/graphs/OvertimeAreaGraph.vue'
 import AgeGroup from 'src/components/common/AgeGroup.vue'
+import HeatMap from 'src/components/admin/overview/HeatMap.vue'
 
 const stats = ref([
   {
