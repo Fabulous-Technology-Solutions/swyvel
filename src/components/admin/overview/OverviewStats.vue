@@ -38,6 +38,7 @@
           </div>
           <div class="col border rounded-16 q-pa-md">
             <div class="text-weight-600 q-mb-md">Top Geographies</div>
+            <HeatMap/>
             <TopGeographies />
           </div>
         </div>
@@ -52,6 +53,7 @@ import StatCard from 'src/components/common/cards/StatCard.vue';
 import EngagementRate from 'src/components/admin/overview/EngagementRate.vue';
 import TopGeographies from 'src/components/admin/overview/TopGeographies.vue';
 import StripedChart from './LineChart.vue';
+import HeatMap from 'src/components/admin/overview/HeatMap.vue';
 
 const stats = ref([
   { title: 'Total Posts', count: '420', growthPercent: '40%', growth: 'high', engText: 'Engagement Since last month'},
