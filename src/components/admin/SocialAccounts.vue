@@ -21,6 +21,7 @@
                 color="red"
                 width="24"
                 height="24"
+                 @click="(openDeleteDialog())"
               />
               <IconComp
                 icon="solar:link-minimalistic-2-bold-duotone"
@@ -57,10 +58,17 @@
       </div>
     </div>
   </div>
+    <DeleteDialog ref="deleteDialog" />
+
 </template>
 <script setup>
 import { ref } from 'vue'
 import SocialStats from 'src/components/admin/sub-components/SocialStats.vue'
+import DeleteDialog from 'src/components/common/dialogs/DeleteDialog.vue'
+const deleteDialog = ref(null)
+const openDeleteDialog = () => {
+  deleteDialog.value.showDialog()
+}
 
 const social = ref([
   {
