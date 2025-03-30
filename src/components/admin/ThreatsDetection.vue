@@ -3,10 +3,11 @@
     <div>
       <div class="text-h4 text-bold">Threat Detection</div>
       <div class="text-grey-6 q-mt-sm">
-        Monitor, analyze, and respond to potential threats in real-time to protect your brand and community.
+        Monitor, analyze, and respond to potential threats in real-time to protect your brand and
+        community.
       </div>
     </div>
-    <StatsCards details="threats" />  
+    <StatsCards details="threats" />
 
     <div class="flex flex-start">
       <q-tabs
@@ -79,19 +80,10 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openPostDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
-                      <div class="text-grey">Edit</div>
-                    </q-card-section>
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openDeleteDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
-                      <div class="text-red">Delete</div>
+                    
+                    <q-card-section class="flex items-center q-gutter-x-md cursor-pointer q-py-sm no-wrap" @click="post.show = false"  v-for="(option , index) in dialogueOptions" :key="index">
+                      <IconComp :icon="option.icon" :class="option.name == 'Dismiss' ? 'text-red': ''" width="24" height="24" />
+                      <div :class="option.name == 'Dismiss' ? 'text-red': 'text-grey'">{{option.name}}</div>
                     </q-card-section>
                   </q-card>
 
@@ -121,19 +113,19 @@
                     height="24"
                   />
                   <div>
-                    {{post.account}}
+                    {{ post.account }}
                   </div>
                 </div>
                 <div class="flex q-gutter-sm items-center">
-                    <IconComp
+                  <IconComp
                     :key="index"
                     icon="icon-park-twotone:report"
                     width="24"
-                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    :color="post.alerts == 'Phishing Scam' ? 'yellow' : 'orange'"
                     height="24"
                   />
-                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
-                    {{post.alerts}}
+                  <div :class="post.alerts == 'Phishing Scam' ? 'text-yellow' : 'text-orange'">
+                    {{ post.alerts }}
                   </div>
                 </div>
               </q-card-section>
@@ -184,19 +176,9 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openPostDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
-                      <div class="text-grey">Edit</div>
-                    </q-card-section>
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openDeleteDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
-                      <div class="text-red">Delete</div>
+                      <q-card-section class="flex items-center q-gutter-x-md cursor-pointer q-py-sm no-wrap" @click="post.show = false"  v-for="(option , index) in dialogueOptions" :key="index">
+                      <IconComp :icon="option.icon" :class="option.name == 'Dismiss' ? 'text-red': ''" width="24" height="24" />
+                      <div :class="option.name == 'Dismiss' ? 'text-red': 'text-grey'">{{option.name}}</div>
                     </q-card-section>
                   </q-card>
 
@@ -226,19 +208,19 @@
                     height="24"
                   />
                   <div>
-                    {{post.account}}
+                    {{ post.account }}
                   </div>
                 </div>
                 <div class="flex q-gutter-sm items-center">
-                    <IconComp
+                  <IconComp
                     :key="index"
                     icon="icon-park-twotone:report"
                     width="24"
-                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    :color="post.alerts == 'Phishing Scam' ? 'yellow' : 'orange'"
                     height="24"
                   />
-                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
-                    {{post.alerts}}
+                  <div :class="post.alerts == 'Phishing Scam' ? 'text-yellow' : 'text-orange'">
+                    {{ post.alerts }}
                   </div>
                 </div>
               </q-card-section>
@@ -289,19 +271,9 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openPostDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
-                      <div class="text-grey">Edit</div>
-                    </q-card-section>
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openDeleteDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
-                      <div class="text-red">Delete</div>
+                     <q-card-section class="flex items-center q-gutter-x-md cursor-pointer q-py-sm no-wrap" @click="post.show = false"  v-for="(option , index) in dialogueOptions" :key="index">
+                      <IconComp :icon="option.icon" :class="option.name == 'Dismiss' ? 'text-red': ''" width="24" height="24" />
+                      <div :class="option.name == 'Dismiss' ? 'text-red': 'text-grey'">{{option.name}}</div>
                     </q-card-section>
                   </q-card>
 
@@ -331,19 +303,19 @@
                     height="24"
                   />
                   <div>
-                    {{post.account}}
+                    {{ post.account }}
                   </div>
                 </div>
                 <div class="flex q-gutter-sm items-center">
-                    <IconComp
+                  <IconComp
                     :key="index"
                     icon="icon-park-twotone:report"
                     width="24"
-                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    :color="post.alerts == 'Phishing Scam' ? 'yellow' : 'orange'"
                     height="24"
                   />
-                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
-                    {{post.alerts}}
+                  <div :class="post.alerts == 'Phishing Scam' ? 'text-yellow' : 'text-orange'">
+                    {{ post.alerts }}
                   </div>
                 </div>
               </q-card-section>
@@ -382,19 +354,9 @@
                   <!-- modal section  -->
 
                   <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openPostDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
-                      <div class="text-grey">Edit</div>
-                    </q-card-section>
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openDeleteDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
-                      <div class="text-red">Delete</div>
+                      <q-card-section class="flex items-center q-gutter-x-md cursor-pointer q-py-sm no-wrap" @click="post.show = false"  v-for="(option , index) in dialogueOptions" :key="index">
+                      <IconComp :icon="option.icon" :class="option.name == 'Dismiss' ? 'text-red': ''" width="24" height="24" />
+                      <div :class="option.name == 'Dismiss' ? 'text-red': 'text-grey'">{{option.name}}</div>
                     </q-card-section>
                   </q-card>
 
@@ -424,19 +386,19 @@
                     height="24"
                   />
                   <div>
-                    {{post.account}}
+                    {{ post.account }}
                   </div>
                 </div>
                 <div class="flex q-gutter-sm items-center">
-                    <IconComp
+                  <IconComp
                     :key="index"
                     icon="icon-park-twotone:report"
                     width="24"
-                    :color="post.alerts == 'Phishing Scam'? 'yellow'  : 'orange'"
+                    :color="post.alerts == 'Phishing Scam' ? 'yellow' : 'orange'"
                     height="24"
                   />
-                  <div :class="post.alerts == 'Phishing Scam'? 'text-yellow':'text-orange'">
-                    {{post.alerts}}
+                  <div :class="post.alerts == 'Phishing Scam' ? 'text-yellow' : 'text-orange'">
+                    {{ post.alerts }}
                   </div>
                 </div>
               </q-card-section>
@@ -523,14 +485,39 @@ import DeleteDialog from 'src/components/common/dialogs/DeleteDialog.vue'
 import StatsCards from 'src/components/super-admin/StatsCards.vue'
 // import CreatePostDialog from 'src/components/common/dialogs/CreatePostDialog.vue'
 const tab = ref('post')
-const createPost = ref(null)
-const deleteDialog = ref(null)
-const openPostDialog = () => {
-  createPost.value.showDialog()
-}
-const openDeleteDialog = () => {
-  deleteDialog.value.showDialog()
-}
+// const createPost = ref(null)
+// const deleteDialog = ref(null)
+// const openPostDialog = () => {
+//   createPost.value.showDialog()
+// }
+// const openDeleteDialog = () => {
+//   deleteDialog.value.showDialog()
+// }
+const dialogueOptions = reactive([
+  {
+    name: 'Mark as Verified',
+    icon: 'mdi:progress-tick',
+  },
+    {
+    name: 'Flag for Review',
+    icon: 'si:alert-duotone',
+  },
+    {
+    name: 'Request Removal',
+    icon: 'material-symbols:block',
+  },  {
+    name: 'Mark as Verified',
+    icon: 'mdi:progress-tick',
+  },
+    {
+    name: 'Leave a Note',
+    icon: 'hugeicons:comment-01',
+  },
+    {
+    name: 'Dismiss',
+    icon: 'mdi-light:delete',
+  },
+])
 
 const alltabs = reactive([
   {
@@ -565,7 +552,7 @@ const medium = reactive([
     platform: 'devicon:facebook',
     status: 'Medium',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
   {
     // icon: 'solar:clock-circle-linear',
@@ -577,7 +564,7 @@ const medium = reactive([
     platform: 'skill-icons:twitter',
     status: 'Medium',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
 ])
 const Posts = reactive([
@@ -591,7 +578,7 @@ const Posts = reactive([
     status: 'Hight Risk',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
   {
     time: 'Mar 10, 2025 12:23 pm',
@@ -602,7 +589,7 @@ const Posts = reactive([
     status: 'Critical',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
   {
     time: 'Mar 10, 2025 12:23 pm',
@@ -613,7 +600,7 @@ const Posts = reactive([
     status: 'High Risk',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Phishing Scam'
+    alerts: 'Phishing Scam',
   },
   {
     title: 'LinkedIn',
@@ -626,7 +613,7 @@ const Posts = reactive([
     status: 'Medium',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
   {
     title: 'TikTok',
@@ -639,7 +626,7 @@ const Posts = reactive([
     status: 'Critical',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Phishing Scam'
+    alerts: 'Phishing Scam',
   },
   {
     title: 'YouTube',
@@ -652,7 +639,7 @@ const Posts = reactive([
     status: 'High Risk',
     account: '@HealthTipsDaily',
     show: false,
-    alerts:'Hate Speech Alert'
+    alerts: 'Hate Speech Alert',
   },
 ])
 </script>
