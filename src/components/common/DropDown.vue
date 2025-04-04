@@ -1,5 +1,5 @@
 <template>
-  <q-btn-dropdown dropdown-icon="false" flat dense @click="onMainClick">
+  <q-btn-dropdown dropdown-icon="false" flat dense>
     <!-- Custom dropdown trigger icon -->
     <template v-slot:label>
       <IconComp
@@ -16,7 +16,7 @@
       <q-item
         clickable
         v-close-popup
-        @click="onItemClick"
+        @click="onItemClick(option)"
         v-for="(option, index) in dialogueOptions"
         :key="index"
       >
@@ -34,9 +34,18 @@
       </q-item>
     </q-list>
   </q-btn-dropdown>
+
+  <LeaveNote ref="leaveNoteDialog" />
 </template>
 <script setup>
-import {reactive} from 'vue'
+import {reactive, ref} from 'vue'
+import LeaveNote from 'src/components/common/dialogs/LeaveNote.vue'
+
+const leaveNoteDialog = ref(null)
+const openDialog = () => {
+  leaveNoteDialog.value.showDialog()
+}
+
 const dialogueOptions = reactive([
   {
     name: 'Mark as Verified',
@@ -63,11 +72,14 @@ const dialogueOptions = reactive([
     icon: 'mdi-light:delete',
   },
 ])
-const onMainClick = () => {
-  console.log('clicked')
-}
-const onItemClick = () => {
-  console.log('items clickedd ')
+const onItemClick = (option) => {
+  console.log('Option clicked:', option.name)
+
+  if (option.name === 'Leave a Note') {
+    openDialog()
+  } else {
+    console.log(`Action for ${option.name}`)
+  }
 }
 
 </script>

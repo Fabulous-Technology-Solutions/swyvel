@@ -51,8 +51,8 @@
         <div class="row gap-12">
           <div class="col-4 q-gutter-md" v-for="(post, index) in Posts" :key="index">
             <q-card flat class="border rounded-20">
-              <q-card-section class="row">
-                <div class="col-6">
+              <q-card-section class="row justify-between">
+                <div>
                   <div
                     :class="[
                       'font-14',
@@ -74,34 +74,35 @@
 
                   <div class="font-12 text-grey-7">{{ post.time }}</div>
                 </div>
-                <div
-                  class="col-6 flex item-start justify-end gap-12"
-                  style="position: relative !important"
-                >
-                  <IconComp
-                    icon="fluent:more-horizontal-20-regular"
-                    @click="post.show = true"
-                    width="24"
-                    class="cursor-pointer"
-                    height="24"
-                  />
-                  <!-- modal section  -->
-
-                  <q-card flat v-if="post.show" class="absolute rounded-12 socialCards">
-                    <q-card-section class="flex items-center cursor-pointer q-py-sm no-wrap" @click="(openPostDialog() ,(post.show = false))">
-                      <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
-                      <div class="text-grey">Edit</div>
-                    </q-card-section>
-                    <q-card-section
-                      class="flex items-center cursor-pointer q-py-sm no-wrap"
-                      @click="(openDeleteDialog(), (post.show = false))"
-                    >
-                      <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
-                      <div class="text-red">Delete</div>
-                    </q-card-section>
-                  </q-card>
-
-                  <!-- modal section ended here -->
+                <div>
+                  <q-btn-dropdown dropdown-icon="false" flat dense>
+                    <template v-slot:label>
+                      <IconComp
+                        icon="fluent:more-horizontal-20-regular"
+                        width="24"
+                        height="24"
+                        class="cursor-pointer absolute-center"
+                      />
+                    </template>
+                    <q-list style="width: 140px;">
+                      <q-item dense clickable v-close-popup @click="(openPostDialog() ,(post.show = false))">
+                        <q-item-section>
+                          <div class="flex items-center cursor-pointer q-py-sm no-wrap">
+                            <IconComp icon="iconamoon:edit-thin" width="24" height="24" />
+                            <div class="text-grey q-ml-md">Edit</div>
+                          </div>
+                        </q-item-section>
+                      </q-item>
+                      <q-item dense clickable v-close-popup @click="(openDeleteDialog(), (post.show = false))">
+                        <q-item-section>
+                          <div class="flex items-center cursor-pointer q-py-sm no-wrap">
+                            <IconComp icon="mdi-light:delete" class="text-red" width="24" height="24" />
+                            <div class="text-red q-ml-md">Delete</div>
+                          </div>
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-btn-dropdown>
                 </div>
               </q-card-section>
               <q-card-section>

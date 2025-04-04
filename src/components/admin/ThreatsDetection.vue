@@ -43,8 +43,8 @@
         <div class="row gap-12">
           <div class="col-4 q-gutter-md" v-for="(post, index) in Posts" :key="index">
             <q-card flat class="border rounded-20">
-              <q-card-section class="row">
-                <div class="col-6">
+              <q-card-section class="row justify-between">
+                <div>
                   <div
                     :class="[
                       'font-14',
@@ -66,13 +66,9 @@
 
                   <div class="font-12 text-grey-7">{{ post.time }}</div>
                 </div>
-                <div
-                  class="col-6 flex item-start justify-end gap-12"
-                  style="position: relative !important"
-                >
+                <div>
                   <DropDown />
 
-                  <!-- modal section ended here -->
                 </div>
               </q-card-section>
               <q-card-section>
@@ -153,7 +149,7 @@
                 </div>
                 <div class="col-6 flex item-start justify-end gap-12">
                   <DropDown />
-                  
+
 
                   <!-- modal section ended here -->
                 </div>
@@ -236,7 +232,7 @@
                 </div>
                 <div class="col-6 flex item-start justify-end gap-12">
                   <DropDown />
-                  
+
 
                   <!-- modal section ended here -->
                 </div>
@@ -306,7 +302,7 @@
                   <div class="font-12 text-grey-7">{{ post.time }}</div>
                 </div>
                 <div class="col-6 flex item-start justify-end gap-12">
-               
+
                   <DropDown />
 
                   <!-- modal section ended here -->
@@ -339,7 +335,7 @@
                     {{ post.account }}
                   </div>
                 </div>
-                
+
                 <div class="flex q-gutter-sm items-center">
                   <IconComp
                     :key="index"
