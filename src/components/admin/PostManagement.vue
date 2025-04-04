@@ -116,6 +116,7 @@
                   >"
                 </div>
               </q-card-section>
+              <q-separator class="q-mx-md"/>
 
               <q-card-section>
                 <div class="flex q-gutter-md">
@@ -204,6 +205,7 @@
                   >"
                 </div>
               </q-card-section>
+              <q-separator class="q-mx-md"/>
 
               <q-card-section>
                 <div class="flex q-gutter-md">
@@ -292,6 +294,7 @@
                   >"
                 </div>
               </q-card-section>
+              <q-separator class="q-mx-md"/>
 
               <q-card-section>
                 <div class="flex q-gutter-md">
@@ -368,6 +371,7 @@
                   >"
                 </div>
               </q-card-section>
+              <q-separator class="q-mx-md"/>
 
               <q-card-section>
                 <div class="flex q-gutter-md">
@@ -386,73 +390,7 @@
         </div>
       </q-tab-panel>
     </q-tab-panels>
-    <!-- modal -->
-    <!-- <q-dialog v-model="postModal">
-      <q-card style="width: 585px !important" class="rounded-12">
-        <q-card-section>
-          <div class="text-h6 text-bold">Create New Post</div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none q-gutter-y-md">
-          <q-select dense outlined v-model="model" :options="options" label="Select Platform " />
-          <q-input
-            dense
-            v-model="text"
-            outlined
-            type="textarea"
-            placeholder="Write your post text here..."
-          />
-        </q-card-section>
-        <q-card-section>
-          <div class="row q-gutter-sm">
-            <div class="col">
-              <q-file borderless accept=".jpg, .jpeg" v-model="model">
-                <div
-                  class="row cursor-pointer q-gutter-sm absolute-left"
-                  style="align-items: center !important"
-                >
-                  <IconComp icon="proicons:photo" width="18" height="18" />
-                  <div class="text-grey font-12px">Photos</div>
-                </div>
-              </q-file>
-            </div>
-            <div class="col">
-              <q-file borderless accept="video/*,.mp4,.mov,.avi,.webm" v-model="model">
-                <div
-                  class="row cursor-pointer q-gutter-sm absolute-left"
-                  style="align-items: center !important"
-                >
-                  <IconComp icon="solar:video-library-line-duotone" width="18" height="18" />
-                  <div class="text-grey font-12px">Video</div>
-                </div>
-              </q-file>
-            </div>
-            <div class="col-3">
-              <q-file borderless v-model="model">
-                <div
-                  class="flex q-gutter-x-sm cursor-pointer absolute-left"
-                  style="align-items: center !important"
-                >
-                  <IconComp icon="hugeicons:attachment-square" width="18" height="18" />
-                  <div class="text-grey font-12px">Attachment</div>
-                </div>
-              </q-file>
-            </div>
-            <div class="col-4">
-              <div class="flex full-height q-gutter-x-sm cursor-pointer items-center">
-                <IconComp icon="solar:calendar-linear" width="18" height="18" />
-                <span class="text-grey font-12px">Schedule For Later</span>
-              </div>
-            </div>
-          </div>
-        </q-card-section>
-
-        <q-card-actions align="right" class="row gap-12 q-pa-md">
-          <q-btn no-caps outline class="col" color="grey" label="Cancel" v-close-popup />
-          <q-btn no-caps class="col" color="primary" label="Confirm & Publish" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog> -->
+   
     <CreatePostDialog ref="createPost" />
     <DeleteDialog ref="deleteDialog" />
   </div>

@@ -76,7 +76,7 @@ const routes = [
           {
             path: 'miss-information',
             name: 'miss-information',
-            component: () => import('src/components/admin/MissInformation.vue'),
+            component: () => import('src/components/admin/miss-information/MissInformation.vue'),
           },
           {
             path: 'threats',

@@ -21,7 +21,7 @@
                 color="red"
                 width="24"
                 height="24"
-                 @click="(openDeleteDialog())"
+                @click="openDeleteDialog()"
               />
               <IconComp
                 icon="solar:link-minimalistic-2-bold-duotone"
@@ -44,12 +44,11 @@
                 </div>
               </div>
               <div class="col-1 flex items-end">
-                <IconComp
-                  icon="bi:toggle2-on"
+                <q-toggle
+                  size="30px"
+                  color="primary"
                   v-if="platform.permit"
-                  color="blue"
-                  width="24"
-                  height="24"
+                  v-model="platform.permit"
                 />
               </div>
             </div>
@@ -58,72 +57,70 @@
       </div>
     </div>
   </div>
-    <DeleteDialog ref="deleteDialog" />
-
+  <DeleteDialog ref="deleteDialog" />
 </template>
 <script setup>
 import { ref } from 'vue'
-import SocialStats from 'src/components/admin/sub-components/SocialStats.vue'
+import SocialStats from 'src/components/common/SocialStats.vue'
 import DeleteDialog from 'src/components/common/dialogs/DeleteDialog.vue'
 const deleteDialog = ref(null)
 const openDeleteDialog = () => {
   deleteDialog.value.showDialog()
 }
-
 const social = ref([
   {
     title: 'Facebook',
     icon: 'devicon:facebook',
     link: ' https://www.facebook.com/muhammad.hussnain',
-    permit: true
+    permit: true,
   },
   {
     title: 'Twitter',
     icon: 'skill-icons:twitter',
     link: ' https://twitter.com/muhammad_hussnain',
-    permit: true
+    permit: true,
   },
   {
     title: 'Instagram',
     icon: 'skill-icons:instagram',
     link: ' https://www.instagram.com/muhammad.hussnain',
-    permit: true
+    permit: true,
   },
   {
     title: 'LinkedIn',
     icon: 'skill-icons:linkedin',
     link: '',
-    permit: false
+    permit: false,
   },
   {
     title: 'TikTok',
     icon: 'logos:tiktok-icon',
     link: 'https://www.tiktok.com/@muhammad.hussnain',
-    permit: true
+    permit: true,
   },
   {
     title: 'YouTube',
     icon: 'logos:youtube-icon',
     link: '',
-    permit: false
+    permit: false,
   },
   {
     title: 'Pinterest',
     icon: 'logos:pinterest',
     link: '',
-    permit: false
+    permit: false,
   },
   {
     title: 'Reddit',
     icon: 'logos:reddit-icon',
     link: '',
-    permit: false
+    permit: false,
   },
   {
     title: 'Snapchat',
     icon: 'fa:snapchat-square',
     link: 'https://www.snapchat.com/add/muhammad.hussnain',
-    permit: true
+    permit: true,
   },
 ])
 </script>
