@@ -5,7 +5,7 @@
         <div class="text-weight-600 font-16px">{{ stat.title }}</div>
         <div class="row items-center justify-between">
           <div class="q-gutter-y-md">
-            <div v-if="stat.count" class="text-h5 text-bold">{{ formatNumber(stat.count) }}</div>
+            <div v-if="stat.count" class="text-h5 text-bold">{{ formatNumber(stat.count) }} {{stat.costin}}</div>
             <div v-if="stat.amount" class="text-h5 text-bold">${{ formatNumber(stat.amount) }}</div>
             <div v-if="stat.percent" class="text-h5 text-bold">
               {{ formatNumber(stat.percent) }}%
@@ -112,28 +112,31 @@ if (props.details == 'missinfo') {
   stats.value = [
     {
       title: 'Total Misinformation Alerts',
-      count: 50890,
+      count: 8420,
       growthPercent: '40%',
       growth: 'high',
       caption: 'Increase Since last month',
     },
     {
-      title: 'Active Subscriptions',
-      count: 12450,
+      title: 'Engagements on Flagged Content',
+      count: 2.4,
+      costin: 'M',
       growthPercent: '10%',
       growth: 'low',
       caption: 'Decrease Since last month',
     },
     {
-      title: 'Monthly Revenue',
-      amount: 1245600,
+      title: 'Reach of Flagged Content',
+      count: 316,
+      costin: 'M',
       growthPercent: '20%',
       growth: 'high',
       caption: 'Increase Since last month',
     },
     {
-      title: 'Subscription Renewal Rate',
-      percent: 78,
+      title: 'Impressions on Flagged Content',
+      count: 700,
+      costin: 'M',
       growthPercent: '20%',
       growth: 'low',
       caption: 'Increase Since last month',
