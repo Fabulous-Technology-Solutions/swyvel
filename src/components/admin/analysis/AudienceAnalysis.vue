@@ -25,23 +25,24 @@
       <div class="col-6 border rounded-16">
         <OvertimeAreaGraph title="Audience Growth Over Time" />
       </div>
-      <div class="col border rounded-16">
+      <div class="col border rounded-16 q-pa-md">
+        <div class="text-weight-600 q-mb-md">Audience Sentiment Trend</div>
         <HeatMap details="audience-Analysis" />
-        <div class="row">
-          <div class="col-6  q-pa-md">
-            <div class="flex  q-gutter-md items-center">
+        <div class="row q-gutter-y-md">
+          <div class="col-6">
+            <div class="flex q-gutter-sm items-center">
               <q-badge rounded color="primary" />
-              <div>High-Engagement Regions</div>
+              <div style="flex: 1">High-Engagement Regions</div>
             </div>
           </div>
-          <div class="col-6  q-pa-md  ">
-            <div class="flex q-gutter-md items-center">
+          <div class="col-6">
+            <div class="flex q-gutter-sm items-center">
               <q-badge rounded style="background-color: #d6ae51" />
-              <div>Neutral / Mixed Sentiment Zones</div>
+              <div style="flex: 1">Neutral / Mixed Sentiment Zones</div>
             </div>
           </div>
-          <div class="col-12  q-pa-md ">
-            <div class="flex  q-gutter-md  items-center">
+          <div class="col-12">
+            <div class="flex  q-gutter-sm  items-center">
               <q-badge rounded style="background-color: #CB1F27" />
               <div class="elipsis">Misinformation & Negative Sentiment Hotspots</div>
             </div>

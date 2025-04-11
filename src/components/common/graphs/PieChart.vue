@@ -47,7 +47,20 @@ const chartOptions = ref ({
         size: '50%'
       }
     }
+  },
+  states: {
+  hover: {
+    filter: {
+      type: 'none'
+    }
+  },
+  active: {
+    filter: {
+      type: 'none'
+    }
   }
+},
+
 
 });
 

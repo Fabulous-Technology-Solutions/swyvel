@@ -7,7 +7,7 @@
         time.
       </div>
     </div>
-    <StatsCards />
+    <StatsCards details="reports_analytics" />
     <div class="row q-gutter-x-lg">
       <div class="col">
         <AreaGraph :series="growthSeries" :color="['#2F5CEF']" title="User Growth Over Time" />
