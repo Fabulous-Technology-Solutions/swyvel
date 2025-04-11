@@ -59,7 +59,7 @@ const chartOptions = ref({
   },
   yaxis: {
     min: 0,
-    max: 40,
+    max: 50,
     labels: {
       formatter: (val) => `${val}%`,
       style: {

@@ -39,11 +39,12 @@
       </div>
     </div>
     <div class="row q-gutter-x-lg">
-      <div class="col border rounded-16">
+      <div class="col border rounded-16 q-pa-md">
+        <div class="text-weight-600 q-mb-md">Misinformation & Fake Engagement Alerts</div>
         <HeatMap details="ai-insights" />
-        <div class="flex q-pa-md q-gutter-md items-center">
+        <div class="flex q-gutter-md items-center">
            <q-badge rounded style="background-color:#D6AE51; " />
-           <div>
+           <div style="flex: 1">
             2,500 suspicious accounts detected engaging with recent ads
            </div>
         </div>

@@ -102,11 +102,9 @@ const routes = [
     component: () => import('src/layouts/LandingLayout.vue'),
     children: [{ path: '', component: () => import('pages/landingPage.vue') }],
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('pages/LoginPage.vue'),
-  },
+  { path: '/auth/login', component: () => import('pages/LoginPage.vue') },
+  { path: '/auth/signup', component: () => import('pages/SignupPage.vue') },
+
 
   // Always leave this as last one,
   // but you can also remove it

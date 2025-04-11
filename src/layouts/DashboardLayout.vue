@@ -209,6 +209,17 @@
               </span>
             </q-item>
           </router-link>
+          <div style="color: black; text-decoration: none; cursor: pointer;" @click="openLogoutDialog">
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+            >
+              <IconComp icon="solar:logout-bold-duotone" class="icon" width="24" height="24" />
+              <span class="q-ml-md font-14">
+                Logout
+              </span>
+            </q-item>
+          </div>
         </div>
         <div v-else>
           <router-link
@@ -228,6 +239,17 @@
               </span>
             </q-item>
           </router-link>
+          <div style="color: black; text-decoration: none; cursor: pointer;" @click="openLogoutDialog">
+            <q-item
+              active-class="my-menu-link"
+              class="flex items-center rounded-12"
+            >
+              <IconComp icon="solar:logout-bold-duotone" class="icon" width="24" height="24" />
+              <span class="q-ml-md font-14">
+                Logout
+              </span>
+            </q-item>
+          </div>
         </div>
       </q-list>
     </q-drawer>
@@ -236,11 +258,19 @@
       <router-view />
     </q-page-container>
   </q-layout>
+  <LogoutDialog ref="logout"/>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { userStore } from 'src/stores/userStore'
+import LogoutDialog from 'src/components/common/dialogs/LogoutDialog.vue'
+const  logout = ref(null)
+const openLogoutDialog = ()=>{
+  console.log("showDialog");
+  logout.value.showDialog()
+}
 const store = userStore()
 const route = useRoute()
 // const currentUser = route.currentUser;
@@ -275,7 +305,7 @@ const dashboard_superAdmin = [
     title: 'Notifications',
     icon: 'ph:notification-duotone',
     name: 'notifications',
-    to: '#',
+    to: '/dashboard/notifications',
     role: 'superadmin',
   },
 ]
@@ -369,12 +399,7 @@ const settings = [
     name: 'subscription and billing',
     to: '/dashboard/subscription-detail',
   },
-  {
-    title: 'Logout',
-    icon: 'solar:logout-bold-duotone',
-    name: 'login',
-    to: '/login',
-  },
+
 ]
 const settings_super = [
   {
@@ -388,12 +413,6 @@ const settings_super = [
     icon: 'ph:users-four-duotone',
     name: 'teams',
     to: '/dashboard/team-members',
-  },
-  {
-    title: 'Logout',
-    icon: 'solar:logout-bold-duotone',
-    name: 'login',
-    to: '/login',
   },
 ]
 </script>

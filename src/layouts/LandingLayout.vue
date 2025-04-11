@@ -27,7 +27,7 @@
                 no-caps
                 color="white"
                 class="text-black"
-                to="/login"
+                to="/auth/login"
                 label="Sign In"
               />
               <q-btn
@@ -35,6 +35,7 @@
                 no-caps
                 class="b-rounded-sm q-px-lg"
                 color="primary"
+                to="/auth/signup"
                 label="Sign Up"
               />
             </div>
@@ -107,7 +108,7 @@
           <q-list>
             <q-item v-for="(tab, index) in tabLinks" :key="index">
               <q-item-section @click="scrollTo(tab.routeId)">
- 
+
                 <q-item-label  @click="showHide(false)">{{ tab.name }}</q-item-label>
               </q-item-section>
             </q-item>
@@ -118,7 +119,7 @@
                 outline
                 color="white"
                 class="text-black full-width"
-                to="/login"
+                to="/auth/login"
                 label="Sign In"
               />
             </q-item>
@@ -129,7 +130,7 @@
                 no-caps
                 class="b-rounded-sm q-px-lg full-width"
                 color="primary"
-                to="#"
+                to="/auth/signup"
                 label="Sign Up"
               />
             </q-item>

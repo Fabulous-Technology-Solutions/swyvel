@@ -106,12 +106,7 @@ const props = defineProps({
   details: String,
   default: [],
 })
-// const stats = ref([
-//   { title: 'Total Users', count: 50890, growthPercent: '40%', growth: 'high'},
-//   { title: 'Active Subscriptions', count: 12450, growthPercent: '10%', growth: 'low'},
-//   { title: 'Monthly Revenue', amount: 1245600, growthPercent: '20%', growth: 'high'},
-//   { title: 'Subscription Renewal Rate', percent: 78, growthPercent: '20%', growth: 'low'},
-// ])
+
 const stats = ref([])
 if (props.details == 'missinfo') {
   stats.value = [
@@ -178,7 +173,14 @@ if (props.details == 'missinfo') {
       caption: 'Active Cases Under Review',
     },
   ]
-} else {
+} else if (props.details == 'reports_analytics') {
+  stats.value = [
+    { title: 'Total Users', count: 50890, growthPercent: '40%', growth: 'high' },
+    { title: 'Active Subscriptions', count: 12450, growthPercent: '10%', growth: 'low' },
+    { title: 'Monthly Revenue', amount: 1245600, growthPercent: '20%', growth: 'high' },
+    { title: 'Churn Rate', percent: 18, growthPercent: '20%', growth: 'low' },
+  ]
+}else {
   stats.value = [
     { title: 'Total Users', count: 50890, growthPercent: '40%', growth: 'high' },
     { title: 'Active Subscriptions', count: 12450, growthPercent: '10%', growth: 'low' },
