@@ -7,6 +7,7 @@
           <div>
             <q-select
               outlined
+              multiple
               v-model="formData.selectedPlatform"
               :options="platformOptions"
               label="Select Platform"
@@ -151,14 +152,10 @@ const hideDialog = () => {
   dialog.value.hide()
 }
 
-const platformOptions = ref([
-  { label: 'youtube', value: 'youtube' },
-  { label: 'Facebook', value: 'facebook' },
-  { label: 'Instagram', value: 'instagram' },
-])
+const platformOptions = [ 'Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'Facebook', 'Youtube' ]
 
 const formData = reactive({
-  selectedPlatform: '',
+  selectedPlatform: [],
   description: '',
 })
 
