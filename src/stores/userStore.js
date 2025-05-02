@@ -5,7 +5,7 @@ import {  ref } from 'vue'
 export const userStore = defineStore('auth', () => {
   const user = ref(null)
   const isAuthenticated = ref(true)
-  const currentUser = ref('admin')
+  const currentUser = ref('superadmin')
 
 
 //   const login = async (email, password, remember) => {
