@@ -95,6 +95,7 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from 'src/stores/auth/authStore'
+import {Notify} from 'quasar'
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -109,8 +110,16 @@ const formData = reactive({
 const handleSignup = async() =>{
   // authStore.signup(formData)
    const res = await authStore.signup(formData);
-   console.log(res,"signup")
    
+  //  if (res.status === 200) {
+  
+    Notify.create({
+      message: res.data.message,
+      color: 'positive',
+      position: 'top',
+    })
+  //  }
+
 }
 
 </script>

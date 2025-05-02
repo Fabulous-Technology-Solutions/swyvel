@@ -17,6 +17,9 @@ export const useAuthStore = defineStore('auth', () => {
   const signup = async (credentials) => {
     try {
       const response = await api.post('/register/', credentials)
+      isAuthenticated.value = true
+      token.value = response.data.access
+      localStorage.setItem('token', response.data.access)
       return response
     } catch (err) {
       console.log(err, "this is the error")
