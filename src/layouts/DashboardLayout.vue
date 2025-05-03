@@ -53,7 +53,7 @@
         <q-item-label class="text-grey-7 q-py-md font-14"> Dashboards </q-item-label>
         <!-- <div class="grey-5">
          </div> -->
-        <div v-if="store.currentUser !== 'admin'">
+        <div v-if="store.currentRole === 'superadmin'">
           <router-link
             v-for="dash_super in dashboard_superAdmin"
             :key="dash_super.title"
@@ -81,7 +81,7 @@
             </q-item>
           </router-link>
         </div>
-        <div v-else>
+        <div v-if="store.currentRole === 'admin'">
           <router-link
             v-for="dash in dashboard"
             :key="dash.title"
@@ -109,7 +109,7 @@
             </q-item>
           </router-link>
         </div>
-        <div v-if="store.currentUser == 'admin'">
+        <div v-if="store.currentRole == 'admin'">
           <q-item-label class="text-grey-7 q-py-md font-14"> Social Media Management </q-item-label>
           <router-link
             v-for="media in socials"
@@ -129,7 +129,7 @@
             </q-item>
           </router-link>
         </div>
-        <div v-if="store.currentUser !== 'admin'">
+        <div v-if="store.currentRole == 'superadmin'">
           <q-item-label class="text-grey-7 q-py-md font-14"> Pages </q-item-label>
           <router-link
             v-for="page in pages"
@@ -149,7 +149,7 @@
             </q-item>
           </router-link>
         </div>
-        <div v-if="store.currentUser == 'admin'">
+        <div v-if="store.currentRole == 'admin'">
           <q-item-label class="text-grey-7 q-py-md font-14"> Security & Reputation </q-item-label>
           <router-link
             v-for="secure in security"
@@ -169,7 +169,7 @@
             </q-item>
           </router-link>
         </div>
-        <div v-if="store.currentUser == 'admin'">
+        <div v-if="store.currentRole == 'admin'">
           <q-item-label class="text-grey-7 q-py-md font-14"> Reports & Insights </q-item-label>
           <router-link
             v-for="insight in insights"
@@ -191,7 +191,7 @@
         </div>
 
         <q-item-label class="text-grey-7 q-py-md font-14"> Settings </q-item-label>
-        <div v-if="store.currentUser !== 'admin'">
+        <div v-if="store.currentRole === 'superadmin'">
           <router-link
             v-for="setting_super in settings_super"
             :key="setting_super.title"
@@ -221,7 +221,7 @@
             </q-item>
           </div>
         </div>
-        <div v-else>
+        <div v-if="store.currentRole === 'admin'">
           <router-link
             v-for="setting in settings"
             :key="setting.title"
@@ -264,18 +264,17 @@
 <script setup>
 import {  ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { userStore } from 'src/stores/userStore'
+import { useAuthStore } from 'src/stores/auth/authStore'
 import LogoutDialog from 'src/components/common/dialogs/LogoutDialog.vue'
 
 const  logout = ref(null)
+const openLogoutDialog = ()=>{
 
-const openLogoutDialog = async()=>{
-  
   logout.value.showDialog()
 }
-const store = userStore()
+const store = useAuthStore()
 const route = useRoute()
-// const currentUser = route.currentUser;
+
 const dashboard = [
   {
     title: 'Overview',
