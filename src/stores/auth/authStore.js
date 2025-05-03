@@ -89,20 +89,22 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const logout = async () => {
-    alert("yess")
-    // try {
-    //   const response = await api.post('/auth/logout/')
-    //   currentUser.value = null
-    //   isAuthenticated.value = false
-    //   currentRole.value = null
-    //   token.value = null
-
-    //   localStorage.removeItem('token')
-
-    //   return response
-    // } catch (err) {
-    //   console.log(err)
-    // }
+    try {
+      const refreshToken = localStorage.getItem('refreshToken')
+      const response = await api.post('/logout/', {
+        refresh: refreshToken,
+      })
+      currentUser.value = null
+      isAuthenticated.value = false
+      currentRole.value = null
+      token.value = null
+      localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
+      console.log(response)
+    } catch (err) {
+      console.error('Logout failed:', err)
+      throw err
+    }
   }
 
   // const changePassword = async (credentials) => {
