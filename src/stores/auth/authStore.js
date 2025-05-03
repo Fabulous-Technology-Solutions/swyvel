@@ -1,19 +1,34 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-// import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import api from 'src/utils/axios'
 import { useErrorHandler } from 'src/utils/processError'
+import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-  // const router = useRouter()
+  const router = useRouter()
 
   const newUserId = ref(null)
   const currentUser = ref(null)
   const isAuthenticated = ref(false)
-  const currentRole = ref('admin')
+  const currentRole = ref('')
   const { processErrors } = useErrorHandler()
-
   const token = ref(localStorage.getItem('token') || null)
+
+  const getRoleName = (code) => {
+    switch (code) {
+      case 'AD':
+        return 'admin'
+      case 'RU':
+        return 'user'
+      case 'SM':
+        return 'manager'
+      case 'SA':
+        return 'superadmin'
+      default:
+        return code.toLowerCase()
+    }
+  }
 
   const signup = async (credentials) => {
     try {
@@ -21,7 +36,8 @@ export const useAuthStore = defineStore('auth', () => {
       isAuthenticated.value = true
       token.value = response.data.access
       localStorage.setItem('token', response.data.access)
-      // processErrors
+      localStorage.setItem('refreshToken', response.data.refresh)
+      currentRole.value = getRoleName(response.data.tokens.user?.role)
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -32,43 +48,41 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const response = await api.post('/login/', credentials)
 
-      // if (response.status === 200) {
-      // currentUser.value = response.data.user
-      // currentRole.value = response.data?.user?.role
-      // isAuthenticated.value = true
-      // token.value = response.data.token
-      // currentRole.value =  response.data.role.toLowerCase()
+        isAuthenticated.value = true
+        token.value = response.data.tokens.access
+        currentRole.value = getRoleName(response.data.tokens.role)
+        localStorage.setItem('token', response.data.tokens.access)
+        localStorage.setItem('refreshToken', response.data.tokens.refresh)
+        router.push('/dashboard/overview')
+        return response
 
-      // localStorage.setItem('token', response.data.token)
-      // }
-      return response
     } catch (err) {
-      processErrors(err.response?.data || err.message)
+      // processErrors(err.response?.data || err.message)
+      console.log(err)
+      Notify.create({
+        type: 'negative',
+        message: err.response.data?.message || 'Login Failed',
+        position: 'top',
+      })
     }
   }
 
-  // const forget = async (credentials) =>{
-  //   try {
-  //     const response = await api.post('/auth/forgot-password/', credentials)
-
-  //     return response
-  //   } catch (err) {
-  //     return err.response
-  //   }
-  // }
   const forget = async (credentials) => {
+
 
     try {
       const response = await api.post('password-reset/', credentials)
       localStorage.setItem("userEmail", credentials.email)
       // processErrors
       return response
+
     } catch (err) {
       processErrors(err.response?.data || err.message)
     }
   }
   const resetPassword = async (credentials) =>{
     try {
+
       const response = await api.post('password-reset/confirm/', credentials)
    
       // processErrors
@@ -78,6 +92,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
   const changePassword = async(credentials) =>{
+
     try {
       const response = await api.post('change-password/', credentials)
    
