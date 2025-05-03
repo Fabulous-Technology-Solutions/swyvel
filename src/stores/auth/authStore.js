@@ -1,12 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import api from 'src/utils/axios'
 import { useErrorHandler } from 'src/utils/processError'
-import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-  const router = useRouter()
+
 
   const newUserId = ref(null)
   const currentUser = ref(null)
@@ -85,6 +83,16 @@ export const useAuthStore = defineStore('auth', () => {
         position: 'top',
       })
     }
+
+    // catch (err) {
+    //   // processErrors(err.response?.data || err.message)
+    //   console.log(err)
+    //   Notify.create({
+    //     type: 'negative',
+    //     message: err.response.data?.message || 'Login Failed',
+    //     position: 'top',
+    //   })
+    // }
   }
 
   const forget = async (credentials) => {
@@ -142,6 +150,19 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+
+  const getUser = async ()=>{
+    console.log("yesss")
+    try {
+      const response = await api.get('profile/')
+
+      // processErrors
+      return response
+    } catch (err) {
+      processErrors(err.response?.data || err.message)
+    }
+  }
+
   return {
     currentUser,
     isAuthenticated,
@@ -155,5 +176,6 @@ export const useAuthStore = defineStore('auth', () => {
     forget,
     changePassword,
     resetPassword,
+    getUser,
   }
 })

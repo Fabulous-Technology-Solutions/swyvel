@@ -122,12 +122,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onBeforeMount , ref } from "vue";
 
 const previewImage = ref("");
 const fileName = ref("");
 const selectedFile = ref(null);
 const isDragging = ref(false);
+import { useAuthStore} from "src/stores/auth/authStore"
+const store = useAuthStore()
 
 const handleFileUpload = (event) => {
   const file = event.target.files[0];
@@ -168,6 +170,16 @@ const permissions = ref([
   {label: 'Email & Push Preferences', isAllow: true},
   {label: 'Custom Alerts', isAllow: false},
 ])
+
+
+const getProfileInfo = async() =>{
+  const response  = await store.getUser()
+  console.log(response, "settings")
+}
+
+onBeforeMount(()=>{
+  getProfileInfo()
+})
 </script>
 
 <style>
