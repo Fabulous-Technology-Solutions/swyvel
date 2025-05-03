@@ -258,16 +258,18 @@
       <router-view />
     </q-page-container>
   </q-layout>
-  <LogoutDialog ref="logout"/>
+  <LogoutDialog ref="logout" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {  ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from 'src/stores/auth/authStore'
 import LogoutDialog from 'src/components/common/dialogs/LogoutDialog.vue'
+
 const  logout = ref(null)
 const openLogoutDialog = ()=>{
+
   logout.value.showDialog()
 }
 const store = useAuthStore()

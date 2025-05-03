@@ -60,11 +60,17 @@
                 />
               </div>
               <div class="full-width">
-                <q-btn no-caps :loading="isLoading" color="primary" class="rounded-8 font-16px full-width" type="submit">
+                <q-btn
+                  no-caps
+                  :loading="isLoading"
+                  color="primary"
+                  class="rounded-8 font-16px full-width"
+                  type="submit"
+                >
                   Signup
                   <template v-slot:loading>
                     <div class="flex q-gutter-md">
-                     <q-spinner-gears color="white" class="on-left" />
+                      <q-spinner-gears color="white" class="on-left" />
                       <span>Loading</span>
                     </div>
                   </template>
@@ -75,9 +81,7 @@
           <div>
             <div class="text-grey-7 text-center q-mt-md">
               Already have an account?
-              <a
-                @click="router.push('/auth/login')"
-                class="cursor-pointer text-weight-bold text-primary"
+              <a @click="router.push('/auth/login')" class="cursor-pointer text-weight-bold text-primary"
                 >Login</a
               >
             </div>
@@ -92,14 +96,14 @@
 </template>
 
 <script setup>
-import { reactive,ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from 'src/stores/auth/authStore'
 // import {Notify} from 'quasar'
 import { handleSuccess } from 'src/utils/processSuccess'
 const authStore = useAuthStore()
 const router = useRouter()
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 const formData = reactive({
   first_name: '',
@@ -136,7 +140,7 @@ const formData = reactive({
 //   }
 // };
 const handleSignup = async () => {
-  isLoading.value = true;
+  isLoading.value = true
   const response = await authStore.signup(formData)
 
   if (response) {
@@ -146,8 +150,8 @@ const handleSignup = async () => {
       redirectRoute: '/dashboard',
       router,
     })
-    isLoading.value = false;
-  }else {
+    isLoading.value = false
+  } else {
     isLoading.value = false
   }
 }

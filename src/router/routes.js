@@ -102,8 +102,43 @@ const routes = [
     component: () => import('src/layouts/LandingLayout.vue'),
     children: [{ path: '', component: () => import('pages/landingPage.vue') }],
   },
-  { path: '/auth/login', component: () => import('pages/LoginPage.vue') },
-  { path: '/auth/signup', component: () => import('pages/SignupPage.vue') },
+  // { path: '/auth/login', component: () => import('pages/LoginPage.vue') },
+  // { path: '/auth/signup', component: () => import('pages/SignupPage.vue') },
+  // { path: '/auth/forget', component: () => import('pages/ForgetPage.vue') },
+  // { path: '/auth/reset', component: () => import('pages/ResetPassword.vue') },
+  {
+    path: '/auth',
+    component: () => import('src/layouts/LoginLayout.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login Page',
+        component: () => import('src/pages/LoginPage.vue'),
+      },
+      {
+        path: 'signup',
+        name: 'Sigup Page',
+        component: () => import('src/pages/SignupPage.vue'),
+      },
+      {
+        path: 'forgot-password',
+        name: 'Forgot Password',
+        component: () => import('src/pages/ForgetPage.vue'),
+      },
+      {
+        path: 'new-password',
+        name: 'New Password',
+        component: () => import('src/pages/ChangePassword.vue'),
+      },
+      {
+        path: 'reset-password/:userId/:token',
+        name: 'New Password',
+        component: () => import('src/pages/ResetPassword.vue'),
+      },
+     
+    ],
+  },
+  
 
 
   // Always leave this as last one,

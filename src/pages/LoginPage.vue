@@ -2,7 +2,7 @@
   <div id="login" class="main-wrapper row">
     <div class="col-12 col-md-6 login-side">
       <div class="q-pa-lg text-bold text-h6">LOGO</div>
-      <div class="flex flex-center login-container">
+      <div class="flex flex-center login-container" style="height:80vh">
         <div class="q-gutter-md">
           <q-form @submit.prevent="login()">
             <div class="q-mb-lg">
@@ -35,7 +35,7 @@
                   <q-checkbox v-model="remember" label="Remember for 30 days " />
                 </div>
                 <div>
-                  <a class="text-primary text-bold" href="">forgot password?</a>
+                  <router-link class="text-primary text-bold" to="/auth/forgot-password">forgot password?</router-link>
                 </div>
               </div>
               <div class="full-width">
