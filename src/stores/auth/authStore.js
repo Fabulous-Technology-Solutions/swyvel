@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const newUserId = ref(null)
   const currentUser = ref(null)
   const isAuthenticated = ref(false)
-  const currentRole = ref('')
+  const currentRole = ref(localStorage.getItem('role') || null)
   const { processErrors } = useErrorHandler()
   const token = ref(localStorage.getItem('token') || null)
 
@@ -38,6 +38,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('token', response.data.access)
       localStorage.setItem('refreshToken', response.data.refresh)
       currentRole.value = getRoleName(response.data.tokens.user?.role)
+      localStorage.setItem('role', currentRole.value)
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -50,9 +51,10 @@ export const useAuthStore = defineStore('auth', () => {
 
         isAuthenticated.value = true
         token.value = response.data.tokens.access
-        currentRole.value = getRoleName(response.data.tokens.role)
         localStorage.setItem('token', response.data.tokens.access)
         localStorage.setItem('refreshToken', response.data.tokens.refresh)
+        currentRole.value = getRoleName(response.data.tokens.role)
+        localStorage.setItem('role', currentRole.value)
         router.push('/dashboard/overview')
         return response
 
@@ -84,7 +86,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
 
       const response = await api.post('password-reset/confirm/', credentials)
-   
+
       // processErrors
       return response
     } catch (err) {
@@ -95,7 +97,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       const response = await api.post('change-password/', credentials)
-   
+
       // processErrors
       return response
     } catch (err) {
@@ -115,6 +117,7 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = null
       localStorage.removeItem('token')
       localStorage.removeItem('refreshToken')
+      localStorage.removeItem('role')
       console.log(response)
     } catch (err) {
       console.error('Logout failed:', err)
@@ -122,14 +125,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // const changePassword = async (credentials) => {
-  //   try {
-  //     const response = await api.post('/auth/reset-password/', credentials)
-  //     return response
-  //   } catch (err) {
-  //     return err.response
-  //   }
-  // }
 
   return {
     currentUser,

@@ -50,17 +50,5 @@ const hideDialog = () => {
   dialogRef.value.hide()
 }
 
-const handleLogout =  () => {
-  // const response =  store.logout()
-
-  // if (response) {
-  //   // Only proceed if response exists (success case)
-  //   handleSuccess(response, {
-  //     successMessage: 'Account created successfully!',
-  //     redirectRoute: '/dashboard',
-  //     router,
-  //   })
-  // }
-}
 defineExpose({ showDialog })
 </script>
