@@ -2,9 +2,11 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import api from 'src/utils/axios'
 import { useErrorHandler } from 'src/utils/processError'
+import { useRouter } from 'vue-router'
+import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-
+const router = useRouter
 
   const newUserId = ref(null)
   const currentUser = ref(null)
@@ -45,17 +47,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const verifyOtp = async (otp) => {
-    try {
-
-        const url = 'verify-otp/'
-        const response = await api.post(url,  otp )
-        return response
-
-    } catch (err) {
-      processErrors(err.response?.data || err.message)
-    }
-  }
 
   const login = async (credentials) => {
     try {
@@ -171,7 +162,6 @@ export const useAuthStore = defineStore('auth', () => {
     newUserId,
     login,
     signup,
-    verifyOtp,
     logout,
     forget,
     changePassword,
