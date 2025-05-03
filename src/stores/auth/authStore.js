@@ -57,52 +57,62 @@ export const useAuthStore = defineStore('auth', () => {
   //   }
   // }
   const forget = async (credentials) => {
+
     try {
-      const response = await api.post('/auth/forgot-password/', credentials)
-
-      console.log('Password reset email sent successfully')
-      return {
-        success: true,
-        data: response.data,
-        status: response.status,
-      }
+      const response = await api.post('password-reset/', credentials)
+      localStorage.setItem("userEmail", credentials.email)
+      // processErrors
+      return response
     } catch (err) {
-      const errorResponse = {
-        success: false,
-        error: err.response?.data?.message || 'Password reset failed',
-        status: err.response?.status || 500,
-        details: err.response?.data?.errors || null,
-      }
-
-      console.error('Forgot password error:', errorResponse)
-      return errorResponse
+      processErrors(err.response?.data || err.message)
+    }
+  }
+  const resetPassword = async (credentials) =>{
+    try {
+      const response = await api.post('password-reset/confirm/', credentials)
+   
+      // processErrors
+      return response
+    } catch (err) {
+      processErrors(err.response?.data || err.message)
+    }
+  }
+  const changePassword = async(credentials) =>{
+    try {
+      const response = await api.post('change-password/', credentials)
+   
+      // processErrors
+      return response
+    } catch (err) {
+      processErrors(err.response?.data || err.message)
     }
   }
 
   const logout = async () => {
-    try {
-      const response = await api.post('/auth/logout/')
-      currentUser.value = null
-      isAuthenticated.value = false
-      currentRole.value = null
-      token.value = null
+    alert("yess")
+    // try {
+    //   const response = await api.post('/auth/logout/')
+    //   currentUser.value = null
+    //   isAuthenticated.value = false
+    //   currentRole.value = null
+    //   token.value = null
 
-      localStorage.removeItem('token')
+    //   localStorage.removeItem('token')
 
-      return response
-    } catch (err) {
-      console.log(err)
-    }
+    //   return response
+    // } catch (err) {
+    //   console.log(err)
+    // }
   }
 
-  const changePassword = async (credentials) => {
-    try {
-      const response = await api.post('/auth/reset-password/', credentials)
-      return response
-    } catch (err) {
-      return err.response
-    }
-  }
+  // const changePassword = async (credentials) => {
+  //   try {
+  //     const response = await api.post('/auth/reset-password/', credentials)
+  //     return response
+  //   } catch (err) {
+  //     return err.response
+  //   }
+  // }
 
   return {
     currentUser,
@@ -115,5 +125,6 @@ export const useAuthStore = defineStore('auth', () => {
     logout,
     forget,
     changePassword,
+    resetPassword
   }
 })

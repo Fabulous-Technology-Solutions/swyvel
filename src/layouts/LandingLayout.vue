@@ -108,8 +108,7 @@
           <q-list>
             <q-item v-for="(tab, index) in tabLinks" :key="index">
               <q-item-section @click="scrollTo(tab.routeId)">
-
-                <q-item-label  @click="showHide(false)">{{ tab.name }}</q-item-label>
+                <q-item-label @click="showHide(false)">{{ tab.name }}</q-item-label>
               </q-item-section>
             </q-item>
             <q-item>
@@ -119,7 +118,7 @@
                 outline
                 color="white"
                 class="text-black full-width"
-                to="/auth/login"
+                to="/login"
                 label="Sign In"
               />
             </q-item>
@@ -175,13 +174,11 @@ const showHide = (val) => {
   drawerLeft.value = val
 }
 const scrollTo = (id) => {
-
   const section = document.getElementById(id)
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' })
   }
 }
-
 </script>
 <style scoped>
 .btn-menu {
