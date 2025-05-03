@@ -33,13 +33,27 @@ export const useAuthStore = defineStore('auth', () => {
   const signup = async (credentials) => {
     try {
       const response = await api.post('/register/', credentials)
-      isAuthenticated.value = true
-      token.value = response.data.access
-      localStorage.setItem('token', response.data.access)
-      localStorage.setItem('refreshToken', response.data.refresh)
-      currentRole.value = getRoleName(response.data.tokens.user?.role)
-      localStorage.setItem('role', currentRole.value)
+      // isAuthenticated.value = true
+      // token.value = response.data.access
+      // localStorage.setItem('token', response.data.access)
+      // localStorage.setItem('refreshToken', response.data.refresh)
+      // currentRole.value = getRoleName(response.data.user?.role)
+      // localStorage.setItem('role', currentRole.value)
+      router.push('/auth/verify-otp')
+      // newUserId.value = response.data.user.id
       return response
+    } catch (err) {
+      processErrors(err.response?.data || err.message)
+    }
+  }
+
+  const verifyOtp = async (otp) => {
+    try {
+
+        const url = 'verify-otp/'
+        const response = await api.post(url,  otp )
+        return response
+
     } catch (err) {
       processErrors(err.response?.data || err.message)
     }
@@ -49,15 +63,19 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const response = await api.post('/login/', credentials)
 
-        isAuthenticated.value = true
-        token.value = response.data.tokens.access
-        localStorage.setItem('token', response.data.tokens.access)
-        localStorage.setItem('refreshToken', response.data.tokens.refresh)
-        currentRole.value = getRoleName(response.data.tokens.role)
-        localStorage.setItem('role', currentRole.value)
-        router.push('/dashboard/overview')
-        return response
-
+      isAuthenticated.value = true
+      token.value = response.data.tokens.access
+      localStorage.setItem('token', response.data.tokens.access)
+      localStorage.setItem('refreshToken', response.data.tokens.refresh)
+      currentRole.value = getRoleName(response.data.tokens.role)
+      localStorage.setItem('role', currentRole.value)
+      router.push('/dashboard/overview')
+      Notify.create({
+        type: 'positive',
+        message: 'Login Successful',
+        position: 'top',
+      })
+      return response
     } catch (err) {
       // processErrors(err.response?.data || err.message)
       console.log(err)
@@ -70,21 +88,17 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const forget = async (credentials) => {
-
-
     try {
       const response = await api.post('password-reset/', credentials)
-      localStorage.setItem("userEmail", credentials.email)
+      localStorage.setItem('userEmail', credentials.email)
       // processErrors
       return response
-
     } catch (err) {
       processErrors(err.response?.data || err.message)
     }
   }
-  const resetPassword = async (credentials) =>{
+  const resetPassword = async (credentials) => {
     try {
-
       const response = await api.post('password-reset/confirm/', credentials)
 
       // processErrors
@@ -93,8 +107,7 @@ export const useAuthStore = defineStore('auth', () => {
       processErrors(err.response?.data || err.message)
     }
   }
-  const changePassword = async(credentials) =>{
-
+  const changePassword = async (credentials) => {
     try {
       const response = await api.post('change-password/', credentials)
 
@@ -108,7 +121,7 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = async () => {
     try {
       const refreshToken = localStorage.getItem('refreshToken')
-      const response = await api.post('/logout/', {
+      await api.post('/logout/', {
         refresh: refreshToken,
       })
       currentUser.value = null
@@ -118,13 +131,16 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.removeItem('token')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('role')
-      console.log(response)
+      Notify.create({
+        type: 'positive',
+        message: 'Logout Successful',
+        position: 'top',
+      })
     } catch (err) {
       console.error('Logout failed:', err)
       throw err
     }
   }
-
 
   return {
     currentUser,
@@ -134,9 +150,10 @@ export const useAuthStore = defineStore('auth', () => {
     newUserId,
     login,
     signup,
+    verifyOtp,
     logout,
     forget,
     changePassword,
-    resetPassword
+    resetPassword,
   }
 })

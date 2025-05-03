@@ -135,10 +135,15 @@ const routes = [
         name: 'New Password',
         component: () => import('src/pages/ResetPassword.vue'),
       },
-     
+      {
+        path: 'verify-otp/:userId/:otp_signup',
+        name: 'otp',
+        component: () => import('src/pages/OTPScreen.vue'),
+      },
+
     ],
   },
-  
+
 
 
   // Always leave this as last one,

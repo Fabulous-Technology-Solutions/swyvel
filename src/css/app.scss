@@ -236,6 +236,17 @@ svg {
   overflow: hidden;
 }
 
+#login .login-side,
+#signup .signup-side {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+#login .login-side::-webkit-scrollbar,
+#signup .signup-side::-webkit-scrollbar {
+  display: none;
+}
+
 #login .login-container,
 #signup .signup-container {
   margin: 50px  auto;

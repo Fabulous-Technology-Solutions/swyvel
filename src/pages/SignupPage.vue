@@ -1,6 +1,6 @@
 <template>
   <div id="signup" class="main-wrapper row">
-    <div class="col-12 col-md-6 login-side">
+    <div class="col-12 col-md-6 signup-side">
       <div class="q-pa-lg text-bold text-h6">LOGO</div>
       <div class="flex flex-center signup-container">
         <div class="q-gutter-md">
@@ -11,7 +11,7 @@
                 Start your journey with a simple sign-up!
               </div>
             </div>
-            <div class="row q-gutter-y-md">
+            <div class="row q-gutter-y-sm">
               <div class="col-12 input-field">
                 <label class="input-label">First Name</label>
                 <q-input
@@ -146,8 +146,8 @@ const handleSignup = async () => {
   if (response) {
     // Only proceed if response exists (success case)
     handleSuccess(response, {
-      successMessage: 'Account created successfully!',
-      redirectRoute: '/dashboard',
+      successMessage: 'Account created successfully an email has been sended to you email for the otp!',
+      redirectRoute: '',
       router,
     })
     isLoading.value = false
