@@ -58,17 +58,17 @@
                       /[^A-Za-z0-9]/.test(val) || 'Must contain at least one special character',
                   ]"
                 />
-                
               </div>
               <div class="full-width">
-                <q-btn
-                  type="submit"
-                  unelevated
-                  color="primary"
-                  no-caps
-                  class="rounded-8 font-16px full-width"
-                  >Signup</q-btn
-                >
+                <q-btn no-caps :loading="isLoading" color="primary" class="rounded-8 font-16px full-width" type="submit">
+                  Signup
+                  <template v-slot:loading>
+                    <div class="flex q-gutter-md">
+                     <q-spinner-gears color="white" class="on-left" />
+                      <span>Loading</span>
+                    </div>
+                  </template>
+                </q-btn>
               </div>
             </div>
           </q-form>
@@ -92,36 +92,65 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from 'src/stores/auth/authStore'
-import {Notify} from 'quasar'
+// import {Notify} from 'quasar'
+import { handleSuccess } from 'src/utils/processSuccess'
 const authStore = useAuthStore()
 const router = useRouter()
+const isLoading = ref(false);
 
 const formData = reactive({
   first_name: '',
   last_name: '',
   email: '',
   password: '',
-
-  
 })
-const handleSignup = async() =>{
-  // authStore.signup(formData)
-   const res = await authStore.signup(formData);
-   
-  //  if (res.status === 200) {
-  
-    Notify.create({
-      message: res.data.message,
-      color: 'positive',
-      position: 'top',
+// const handleSignup = async () => {
+//   try {
+//     const res = await authStore.signup(formData);
+
+//     if (res && res.status >= 200 && res.status < 300) {
+//       // Success case
+//       Notify.create({
+//         message: res.data.message || 'Signup successful!',
+//         color: 'positive',
+//         position: 'top'
+//       });
+
+//       router.push('/dashboard');
+//     } else {
+//       Notify.create({
+//         message: res.data?.detail ||
+//                 res.data?.message ||
+//                 res.data?.email[0] ||
+//                 'Signup failed. Please try again.',
+//         color: 'negative',
+//         position: 'top'
+//       });
+//     }
+//   } catch (error) {
+//     console.error('Signup error:', error);
+
+//   }
+// };
+const handleSignup = async () => {
+  isLoading.value = true;
+  const response = await authStore.signup(formData)
+
+  if (response) {
+    // Only proceed if response exists (success case)
+    handleSuccess(response, {
+      successMessage: 'Account created successfully!',
+      redirectRoute: '/dashboard',
+      router,
     })
-  //  }
-
+    isLoading.value = false;
+  }else {
+    isLoading.value = false
+  }
 }
-
 </script>
 
 <style scoped lang="scss"></style>
