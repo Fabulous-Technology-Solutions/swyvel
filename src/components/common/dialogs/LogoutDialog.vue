@@ -19,20 +19,14 @@
 
 <script setup>
 import {  ref } from 'vue'
+import { useAuthStore } from 'src/stores/auth/authStore'
+import { Notify } from 'quasar'
+
 const dialogRef = ref(null)
-// import { useAuthStore } from 'src/stores/auth/authStore'
-// import { useAuthStore} from 'src/stores/auth/authStore'
-// import { handleSuccess } from 'src/utils/processSuccess'
-// const store = useAuthStore();
-// import { useRouter } from 'vue-router'
-// const router = useRouter()
 const showDialog = () => {
   dialogRef.value.show()
 }
 
-import { useAuthStore } from 'src/stores/auth/authStore'
-import { useRouter } from 'vue-router';
-const router = useRouter();
 
 const authStore = useAuthStore()
 
@@ -40,7 +34,11 @@ const handleLogout = async () => {
   try {
     authStore.logout()
     hideDialog()
-    router.push('/auth/login')
+    Notify.create({
+      type: 'positive',
+      message: 'Logout Successful',
+      position: 'top',
+    })
   } catch (error) {
     console.error('Logout error:', error)
   }

@@ -34,14 +34,6 @@ const router = useRouter();
   const signup = async (credentials) => {
     try {
       const response = await api.post('/register/', credentials)
-      // isAuthenticated.value = true
-      // token.value = response.data.access
-      // localStorage.setItem('token', response.data.access)
-      // localStorage.setItem('refreshToken', response.data.refresh)
-      // currentRole.value = getRoleName(response.data.user?.role)
-      // localStorage.setItem('role', currentRole.value)
-      // router.push('/auth/verify-otp')
-      // newUserId.value = response.data.user.id
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -91,7 +83,7 @@ const router = useRouter();
       return response
     } catch (err) {
       // processErrors(err.response?.data || err.message)
-      console.log(err)
+      // console.log(err)
       Notify.create({
         type: 'negative',
         message: err.response.data?.message || 'Login Failed',
@@ -99,15 +91,6 @@ const router = useRouter();
       })
     }
 
-    // catch (err) {
-    //   // processErrors(err.response?.data || err.message)
-    //   console.log(err)
-    //   Notify.create({
-    //     type: 'negative',
-    //     message: err.response.data?.message || 'Login Failed',
-    //     position: 'top',
-    //   })
-    // }
   }
 
   const forget = async (credentials) => {
@@ -154,11 +137,7 @@ const router = useRouter();
       localStorage.removeItem('token')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('role')
-      Notify.create({
-        type: 'positive',
-        message: 'Logout Successful',
-        position: 'top',
-      })
+      router.push('/auth/login')
     } catch (err) {
       console.error('Logout failed:', err)
       throw err
@@ -169,11 +148,22 @@ const router = useRouter();
   const getUser = async ()=>{
     try {
       const response = await api.get('profile/')
-
-      // processErrors
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
+    }
+  }
+  const updateUser = async (credentials)=>{
+    try {
+      const response = await api.patch('profile/', credentials)
+      Notify.create({
+        type: 'positive',
+        message: 'Profile Updated Successfully!',
+        position: 'top',
+      })
+      return response
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -191,5 +181,6 @@ const router = useRouter();
     changePassword,
     resetPassword,
     getUser,
+    updateUser,
   }
 })

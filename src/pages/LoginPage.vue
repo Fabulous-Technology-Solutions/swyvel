@@ -90,15 +90,10 @@
 import { reactive, ref } from 'vue'
 import { useAuthStore } from 'src/stores/auth/authStore'
 import { useRouter } from 'vue-router'
-import { handleSuccess } from 'src/utils/processSuccess'
 const router = useRouter()
-// import { handleSuccess } from 'src/utils/processSuccess'
 const isPwd = ref(true)
 const isLoading = ref(false)
 
-// const email = ref('')
-// const password = ref('')
-// const remember = ref(false)
 const formData = reactive({
   email: '',
   password: '',
@@ -108,15 +103,9 @@ const authStore = useAuthStore()
 
 const login = async () => {
   isLoading.value = true
- 
+
   const response = await authStore.login(formData)
      if (response) {
-    // Only proceed if response exists (success case)
-    handleSuccess(response, {
-      successMessage: 'Logged in successfully!',
-      redirectRoute: '/dashboard/overview',
-      router,
-    })
      isLoading.value = false
   }else {
      isLoading.value = false
