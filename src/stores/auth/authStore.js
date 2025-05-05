@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-const router = useRouter();
+  const router = useRouter()
 
   const newUserId = ref(null)
   const currentUser = ref(null)
@@ -42,8 +42,8 @@ const router = useRouter();
 
   const verifyOTP = async (credentials) => {
     try {
-      const response = await api.post('/verify-otp/',  credentials )
-      if(response) {
+      const response = await api.post('/verify-otp/', credentials)
+      if (response) {
         isAuthenticated.value = true
         token.value = response.data.access
         localStorage.setItem('token', response.data.tokens?.access)
@@ -62,7 +62,6 @@ const router = useRouter();
       console.error(err.response?.data || err.message)
     }
   }
-
 
   const login = async (credentials) => {
     try {
@@ -107,7 +106,6 @@ const router = useRouter();
     try {
       const response = await api.post('password-reset/confirm/', credentials)
 
-      // processErrors
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -117,7 +115,6 @@ const router = useRouter();
     try {
       const response = await api.post('change-password/', credentials)
 
-      // processErrors
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -144,7 +141,31 @@ const router = useRouter();
     }
   }
 
+  const getPreferences = async () => {
+    try {
 
+      const response = await api.get('notifications-preferences/')
+
+
+      return response
+    } catch (err) {
+      processErrors(err.response.data.detail)
+    }
+  }
+  const postPreferences = async (permissions, obtainedId) => {
+    try {
+      if (obtainedId !== null) {
+        const response = await api.patch(`notifications-preferences/${obtainedId}/`, permissions)
+        return response
+      } else {
+        const response = await api.post('notifications-preferences/', permissions)
+        return response
+      }
+    } catch (err) {
+      processErrors(err.response.data.detail)
+    }
+  }
+  
   const getUser = async ()=>{
     try {
       const response = await api.get('profile/')
@@ -153,6 +174,7 @@ const router = useRouter();
       processErrors(err.response?.data || err.message)
     }
   }
+  
   const updateUser = async (credentials)=>{
     try {
       const response = await api.patch('profile/', credentials)
@@ -166,6 +188,7 @@ const router = useRouter();
       console.error(err)
     }
   }
+
 
   return {
     currentUser,
@@ -182,5 +205,8 @@ const router = useRouter();
     resetPassword,
     getUser,
     updateUser,
+    getPreferences,
+    postPreferences,
+
   }
 })

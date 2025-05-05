@@ -24,20 +24,46 @@
             </div>
             <div class="row q-gutter-x-md">
               <div class="col-2">
-                <img v-if="previewImage" :src="previewImage" alt="Profile Image" width="100px" height="100px" style="border-radius: 50%;" />
-                <img v-else src="~assets/user.png" alt="Profile Image" width="100px" height="100px" style="border-radius: 50%;" />
+                <img
+                  v-if="previewImage"
+                  :src="previewImage"
+                  alt="Profile Image"
+                  width="100px"
+                  height="100px"
+                  style="border-radius: 50%"
+                />
+                <img
+                  v-else
+                  src="~assets/user.png"
+                  alt="Profile Image"
+                  width="100px"
+                  height="100px"
+                  style="border-radius: 50%"
+                />
               </div>
-              <div class="col border rounded-8 q-pa-lg"
+              <div
+                class="col border rounded-8 q-pa-lg"
                 @dragover.prevent="dragOver"
                 @dragleave.prevent="dragLeave"
                 @drop.prevent="handleDrop"
                 :class="{ 'drag-over': isDragging }"
               >
                 <div class="uploader-content text-center">
-                  <img src="~assets/upload-icon.svg" alt="">
-                  <input type="file" @change="handleFileUpload" hidden ref="profileInput" accept="image/png, image/jpeg, image/gif, image/svg+xml" />
+                  <img src="~assets/upload-icon.svg" alt="" />
+                  <input
+                    type="file"
+                    @change="handleFileUpload"
+                    hidden
+                    ref="profileInput"
+                    accept="image/png, image/jpeg, image/gif, image/svg+xml"
+                  />
                   <div class="text-grey-7">
-                    <span class="text-primary text-weight-600 cursor-pointer" @click="$refs.profileInput.click()">Click to upload</span> or drag and drop
+                    <span
+                      class="text-primary text-weight-600 cursor-pointer"
+                      @click="$refs.profileInput.click()"
+                      >Click to upload</span
+                    >
+                    or drag and drop
                   </div>
                   <div v-if="fileName" class="text-grey-7">{{ fileName }}</div>
                   <div v-else class="text-grey-7">SVG, PNG, JPG or GIF (max. 800×400px)</div>
@@ -135,14 +161,14 @@
         <q-card-section class="q-gutter-y-lg">
           <div class="font-16px text-weight-medium">Permissions</div>
           <div class="q-gutter-y-sm">
-            <div v-for = "(permission, index) in permissions" :key = "index" class="flex justify-between items-center">
+            <div
+              v-for="(permission, index) in permissions"
+              :key="index"
+              class="flex justify-between items-center"
+            >
               <div>{{ permission.label }}</div>
               <div>
-                <q-toggle
-                  v-model="permission.isAllow"
-                  color="primary"
-                  outlined
-                />
+                <q-toggle v-model="permission.isAllow" color="primary" outlined />
               </div>
             </div>
           </div>
@@ -150,8 +176,24 @@
         <q-separator class="q-my-md" />
         <q-card-section>
           <div class="row justify-end q-gutter-x-md">
-            <q-btn no-caps flat class="border rounded-8" label="Cancel" />
-            <q-btn no-caps unelevated color="primary" class="rounded-8" label="Save Changes" />
+            <!-- <q-btn no-caps flat class="border rounded-8" label="Cancel" /> -->
+            <q-btn
+              no-caps
+              :loading="isLoading"
+              unelevated
+              color="primary"
+              class="rounded-8"
+              label="Save Changes"
+              @click="postPermissions"
+            >
+              
+              <template v-slot:loading>
+                <div class="flex q-gutter-md">
+                  <q-spinner-gears color="white" class="on-left" />
+                  <span>Loading</span>
+                </div>
+              </template>
+            </q-btn>
           </div>
         </q-card-section>
       </q-card>
@@ -163,6 +205,9 @@
 import { onBeforeMount, ref } from "vue";
 import { useAuthStore} from "src/stores/auth/authStore"
 import { api } from "src/utils/axios";
+import { handleSuccess } from 'src/utils/processSuccess'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import { Notify } from "quasar";
 
 const iscPwd = ref(true)
@@ -181,47 +226,60 @@ const confirmPassword = ref("");
 const previewImage = ref("");
 const fileName = ref("");
 const isDragging = ref(false);
-const store = useAuthStore()
 
+const obtainedId = ref(null)
+const store = useAuthStore()
+const isLoading = ref(false)
 const handleFileUpload = (event) => {
-  const file = event.target.files[0];
-  processFile(file);
-};
+  const file = event.target.files[0]
+  processFile(file)
+}
 
 const handleDrop = (event) => {
-  isDragging.value = false;
-  const file = event.dataTransfer.files[0];
-  processFile(file);
-};
+  isDragging.value = false
+  const file = event.dataTransfer.files[0]
+  processFile(file)
+}
 
 const processFile = (file) => {
   if (file) {
-    selectedFile.value = file;
-    fileName.value = file.name;
+    selectedFile.value = file
+    fileName.value = file.name
 
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.onload = (e) => {
-      previewImage.value = e.target.result;
-    };
-    reader.readAsDataURL(file);
+      previewImage.value = e.target.result
+    }
+    reader.readAsDataURL(file)
   }
-};
+}
 
 const dragOver = () => {
-  isDragging.value = true;
-};
+  isDragging.value = true
+}
 
 const dragLeave = () => {
-  isDragging.value = false;
-};
+  isDragging.value = false
+}
 
 const permissions = ref([
-  {label: 'General Notifications', isAllow: true},
-  {label: 'Activity Alerts', isAllow: false},
-  {label: 'Security Notifications', isAllow: true},
-  {label: 'Email & Push Preferences', isAllow: true},
-  {label: 'Custom Alerts', isAllow: false},
+  { label: 'General Notifications', key: 'general_notifications', isAllow: false },
+  { label: 'Activity Alerts', key: 'activity_alerts', isAllow: false },
+  { label: 'Security Notifications', key: 'security_notifications', isAllow: false },
+  { label: 'Email & Push Preferences', key: 'email_push_preferences', isAllow: false },
+  { label: 'Custom Alerts', key: 'custom_alerts', isAllow: false },
 ])
+const getPermissions = async () => {
+  const response = await store.getPreferences()
+  const responseData = response.data
+  obtainedId.value = response.data.id
+
+  const responseMap = new Map(Object.entries(responseData))
+
+  permissions.value = permissions.value.map((permission) => ({
+    ...permission,
+    isAllow: responseMap.get(permission.key) ?? permission.isAllow,
+  }))
 
 
 const getProfileInfo = async () => {
@@ -278,7 +336,39 @@ const changePassword = async () => {
 
 onBeforeMount(()=>{
   getProfileInfo()
-})
+  getPermissions()
+
+  //  permissions.value.forEach((element)=>{
+  //     Object.entries(response.data).forEach(([key , value]) => {
+  //       if(element.key  == key)
+  //       {
+  //         element.isAllow = value;
+  //         console.log(element.isAllow , "elemeents" , "value" , value)
+  //       }
+  //     })
+
+  //  })
+}
+
+const postPermissions = async () => {
+  const permitData = permissions.value.reduce((acc, permission) => {
+    acc[permission.key] = permission.isAllow
+    return acc
+  }, {})
+  const response = await store.postPreferences(permitData, obtainedId.value)
+  if (response) {
+    handleSuccess(response, {
+      successMessage: obtainedId.value ? 'permission successfully Updated' : 'permisions created successfully',
+      redirectRoute: '',
+      router,
+    })
+    isLoading.value = false
+  } else {
+    isLoading.value = false
+  }
+}
+
+
 </script>
 
 <style>
