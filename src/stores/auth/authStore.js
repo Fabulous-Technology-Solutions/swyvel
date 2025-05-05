@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import api from 'src/utils/axios'
 import { useErrorHandler } from 'src/utils/processError'
+import { handleSuccess } from 'src/utils/processSuccess'
 import { useRouter } from 'vue-router'
 import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-const router = useRouter
+const router = useRouter();
 
   const newUserId = ref(null)
   const currentUser = ref(null)
@@ -39,11 +40,34 @@ const router = useRouter
       // localStorage.setItem('refreshToken', response.data.refresh)
       // currentRole.value = getRoleName(response.data.user?.role)
       // localStorage.setItem('role', currentRole.value)
-      router.push('/auth/verify-otp')
+      // router.push('/auth/verify-otp')
       // newUserId.value = response.data.user.id
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
+    }
+  }
+
+  const verifyOTP = async (credentials) => {
+    try {
+      const response = await api.post('/verify-otp/',  credentials )
+      if(response) {
+        isAuthenticated.value = true
+        token.value = response.data.access
+        localStorage.setItem('token', response.data.tokens?.access)
+        localStorage.setItem('refreshToken', response.data.tokens?.refresh)
+        currentRole.value = getRoleName(response.data.tokens?.role)
+        localStorage.setItem('role', currentRole.value)
+        handleSuccess(response, {
+          successMessage: 'Account created successfully !',
+          redirectRoute: '/dashboard/overview',
+          router,
+        })
+      }
+      return response
+
+    } catch (err) {
+      console.error(err.response?.data || err.message)
     }
   }
 
@@ -143,7 +167,6 @@ const router = useRouter
 
 
   const getUser = async ()=>{
-    console.log("yesss")
     try {
       const response = await api.get('profile/')
 
@@ -162,6 +185,7 @@ const router = useRouter
     newUserId,
     login,
     signup,
+    verifyOTP,
     logout,
     forget,
     changePassword,

@@ -47,7 +47,7 @@
                 <q-input
                   outlined
                   v-model="formData.password"
-                  type="password"
+                  :type="isPwd ? 'password' : 'text'"
                   placeholder="* * * * * * * *"
                   :rules="[
                     (val) => !!val || 'Password is required',
@@ -57,7 +57,15 @@
                     (val) =>
                       /[^A-Za-z0-9]/.test(val) || 'Must contain at least one special character',
                   ]"
-                />
+                >
+                <template #append>
+                    <q-icon
+                      :name="isPwd ? 'visibility_off' : 'visibility'"
+                      class="cursor-pointer"
+                      @click="isPwd = !isPwd"
+                    />
+                  </template>
+                </q-input>
               </div>
               <div class="full-width">
                 <q-btn
@@ -104,6 +112,7 @@ import { handleSuccess } from 'src/utils/processSuccess'
 const authStore = useAuthStore()
 const router = useRouter()
 const isLoading = ref(false)
+const isPwd = ref(true)
 
 const formData = reactive({
   first_name: '',

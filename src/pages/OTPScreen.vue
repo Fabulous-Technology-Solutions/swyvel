@@ -59,15 +59,9 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
-// import { useQuasar } from 'quasar'
-import { api } from 'src/utils/axios'
-import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
-// import { useAuthStore } from 'src/stores/auth/authStore'
-import { handleSuccess } from 'src/utils/processSuccess'
-import { processErrors } from 'src/utils/processError'
-const router = useRouter()
-// const authStore = useAuthStore()
+import { useAuthStore } from 'src/stores/auth/authStore'
+const authStore = useAuthStore()
 const route = useRoute()
 
 const otp = reactive(['', '', '', '', '', ''])
@@ -98,32 +92,26 @@ function handleKeyup(event, index) {
   }
 }
 
+function setOtpFields(code) {
+  if (code.length === 6) {
+    code.split('').forEach((digit, index) => {
+      otp[index] = digit
+    })
+  }
+}
+
 async function verify() {
   const code = otp.join('')
   if (!/^\d{6}$/.test(code)) {
     errorMessage.value = 'Please enter all 6 digits.'
     return
   }
-  console.log('otp',  route.params)
+
   const formData = {
     otp: code,
     id: route.params.userId,
   }
-  try {
-    const response = await api.post('/verify-otp/',  formData )
-    if(response) {
-      handleSuccess(response, {
-        successMessage: 'Account created successfully !',
-        redirectRoute: '/dashboard/overview',
-        router,
-      })
-    }
-    return response
-
-  } catch (err) {
-    processErrors(err.response?.data || err.message)
-  }
-
+  await authStore.verifyOTP(formData)
 }
 
 
@@ -147,6 +135,10 @@ const formattedTimer = computed(() => {
 })
 onMounted(() => {
   startTimer()
+
+  const receivedOtp = route.params.otp_signup || ''
+  setOtpFields(receivedOtp)
+
 })
 </script>
 
