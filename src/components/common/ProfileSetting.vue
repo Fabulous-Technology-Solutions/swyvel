@@ -9,17 +9,38 @@
             <div class="row q-gutter-x-lg">
               <div class="col">
                 <div class="text-grey-7">First Name</div>
-                <q-input v-model="first_name" outlined dense type="text" placeholder="Oliva" :rules="[(val) => (val ? true : 'First Name is required')]" />
+                <q-input
+                  v-model="first_name"
+                  outlined
+                  dense
+                  type="text"
+                  placeholder="Oliva"
+                  :rules="[(val) => (val ? true : 'First Name is required')]"
+                />
               </div>
               <div class="col">
                 <div class="text-grey-7">Last Name</div>
-                <q-input v-model="last_name" outlined dense type="text" placeholder="Rhye" :rules="[(val) => (val ? true : 'Last Name is required')]" />
+                <q-input
+                  v-model="last_name"
+                  outlined
+                  dense
+                  type="text"
+                  placeholder="Rhye"
+                  :rules="[(val) => (val ? true : 'Last Name is required')]"
+                />
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <div class="text-grey-7 q-mb-xs">Email</div>
-                <q-input v-model="email" outlined dense type="email" placeholder="olivia@untitledui.com" :rules="[(val) => (val ? true : 'Email is required')]" />
+                <q-input
+                  v-model="email"
+                  outlined
+                  dense
+                  type="email"
+                  placeholder="olivia@untitledui.com"
+                  :rules="[(val) => (val ? true : 'Email is required')]"
+                />
               </div>
             </div>
             <div class="row q-gutter-x-md">
@@ -76,7 +97,14 @@
         <q-card-section>
           <div class="row justify-end q-gutter-x-md">
             <q-btn no-caps flat class="border rounded-8" label="Cancel" />
-            <q-btn no-caps unelevated color="primary" class="rounded-8" @click="updateProfile" label="Save Changes" />
+            <q-btn
+              no-caps
+              unelevated
+              color="primary"
+              class="rounded-8"
+              @click="updateProfile"
+              label="Save Changes"
+            />
           </div>
         </q-card-section>
       </q-card>
@@ -90,7 +118,12 @@
             <div class="row">
               <div class="col">
                 <div class="text-grey-7 q-mb-xs">Current Password</div>
-                <q-input v-model="currentPassword" outlined dense :type="iscPwd ? 'password' : 'text'" placeholder="* * * * * * * *"
+                <q-input
+                  v-model="currentPassword"
+                  outlined
+                  dense
+                  :type="iscPwd ? 'password' : 'text'"
+                  placeholder="* * * * * * * *"
                   :rules="[(val) => (val ? true : 'Current Password is required')]"
                 >
                   <template #append>
@@ -106,8 +139,13 @@
             <div class="row">
               <div class="col">
                 <div class="text-grey-7 q-mb-xs">New Password</div>
-                <q-input v-model="newPassword" outlined dense :type="isnPwd ? 'password' : 'text'" placeholder="* * * * * * * *"
-                :rules="[
+                <q-input
+                  v-model="newPassword"
+                  outlined
+                  dense
+                  :type="isnPwd ? 'password' : 'text'"
+                  placeholder="* * * * * * * *"
+                  :rules="[
                     (val) => !!val || 'Password is required',
                     (val) => val.length >= 8 || 'Password must be at least 8 characters',
                     (val) => /[A-Z]/.test(val) || 'Must contain at least one uppercase letter',
@@ -129,10 +167,15 @@
             <div class="row">
               <div class="col">
                 <div class="text-grey-7 q-mb-xs">Confirm New Password</div>
-                <q-input v-model="confirmPassword" outlined dense :type="iscnPwd ? 'password' : 'text'" placeholder="* * * * * * * *"
+                <q-input
+                  v-model="confirmPassword"
+                  outlined
+                  dense
+                  :type="iscnPwd ? 'password' : 'text'"
+                  placeholder="* * * * * * * *"
                   :rules="[
-                    val => !!val || 'Confirm Password is required',
-                    val => val === newPassword || 'Passwords do not match'
+                    (val) => !!val || 'Confirm Password is required',
+                    (val) => val === newPassword || 'Passwords do not match',
                   ]"
                 >
                   <template #append>
@@ -149,7 +192,14 @@
           <q-separator class="q-my-md" />
           <div class="row justify-end q-gutter-x-md q-pa-md">
             <q-btn no-caps flat class="border rounded-8" label="Cancel" />
-            <q-btn no-caps type="submit" unelevated color="primary" class="rounded-8" label="Save Changes" />
+            <q-btn
+              no-caps
+              type="submit"
+              unelevated
+              color="primary"
+              class="rounded-8"
+              label="Save Changes"
+            />
           </div>
         </q-form>
       </q-card>
@@ -186,7 +236,6 @@
               label="Save Changes"
               @click="postPermissions"
             >
-              
               <template v-slot:loading>
                 <div class="flex q-gutter-md">
                   <q-spinner-gears color="white" class="on-left" />
@@ -262,24 +311,6 @@ const dragLeave = () => {
   isDragging.value = false
 }
 
-const permissions = ref([
-  { label: 'General Notifications', key: 'general_notifications', isAllow: false },
-  { label: 'Activity Alerts', key: 'activity_alerts', isAllow: false },
-  { label: 'Security Notifications', key: 'security_notifications', isAllow: false },
-  { label: 'Email & Push Preferences', key: 'email_push_preferences', isAllow: false },
-  { label: 'Custom Alerts', key: 'custom_alerts', isAllow: false },
-])
-const getPermissions = async () => {
-  const response = await store.getPreferences()
-  const responseData = response.data
-  obtainedId.value = response.data.id
-
-  const responseMap = new Map(Object.entries(responseData))
-
-  permissions.value = permissions.value.map((permission) => ({
-    ...permission,
-    isAllow: responseMap.get(permission.key) ?? permission.isAllow,
-  }))
 
 
 const getProfileInfo = async () => {
@@ -334,20 +365,23 @@ const changePassword = async () => {
 
 
 
-onBeforeMount(()=>{
-  getProfileInfo()
-  getPermissions()
+const permissions = ref([
+  { label: 'General Notifications', key: 'general_notifications', isAllow: false },
+  { label: 'Activity Alerts', key: 'activity_alerts', isAllow: false },
+  { label: 'Security Notifications', key: 'security_notifications', isAllow: false },
+  { label: 'Email & Push Preferences', key: 'email_push_preferences', isAllow: false },
+  { label: 'Custom Alerts', key: 'custom_alerts', isAllow: false },
+])
+const getPermissions = async () => {
+  const response = await store.getPreferences()
+  const responseData = response.data
+  obtainedId.value = response.data.id
+  const responseMap = new Map(Object.entries(responseData))
 
-  //  permissions.value.forEach((element)=>{
-  //     Object.entries(response.data).forEach(([key , value]) => {
-  //       if(element.key  == key)
-  //       {
-  //         element.isAllow = value;
-  //         console.log(element.isAllow , "elemeents" , "value" , value)
-  //       }
-  //     })
-
-  //  })
+  permissions.value = permissions.value.map((permission) => ({
+    ...permission,
+    isAllow: responseMap.get(permission.key) ?? permission.isAllow,
+  }))
 }
 
 const postPermissions = async () => {
@@ -368,6 +402,21 @@ const postPermissions = async () => {
   }
 }
 
+onBeforeMount(()=>{
+  getProfileInfo()
+  getPermissions()
+
+  //  permissions.value.forEach((element)=>{
+  //     Object.entries(response.data).forEach(([key , value]) => {
+  //       if(element.key  == key)
+  //       {
+  //         element.isAllow = value;
+  //         console.log(element.isAllow , "elemeents" , "value" , value)
+  //       }
+  //     })
+
+  //  })
+})
 
 </script>
 

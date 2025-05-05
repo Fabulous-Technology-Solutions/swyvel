@@ -154,7 +154,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
   const postPreferences = async (permissions, obtainedId) => {
     try {
-      if (obtainedId !== null) {
+      if (obtainedId) {
         const response = await api.patch(`notifications-preferences/${obtainedId}/`, permissions)
         return response
       } else {
@@ -165,7 +165,7 @@ export const useAuthStore = defineStore('auth', () => {
       processErrors(err.response.data.detail)
     }
   }
-  
+
   const getUser = async ()=>{
     try {
       const response = await api.get('profile/')
@@ -174,7 +174,7 @@ export const useAuthStore = defineStore('auth', () => {
       processErrors(err.response?.data || err.message)
     }
   }
-  
+
   const updateUser = async (credentials)=>{
     try {
       const response = await api.patch('profile/', credentials)
