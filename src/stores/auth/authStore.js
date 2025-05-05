@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 import { Notify } from 'quasar'
 
 export const useAuthStore = defineStore('auth', () => {
-const router = useRouter();
+  const router = useRouter()
 
   const newUserId = ref(null)
   const currentUser = ref(null)
@@ -50,8 +50,8 @@ const router = useRouter();
 
   const verifyOTP = async (credentials) => {
     try {
-      const response = await api.post('/verify-otp/',  credentials )
-      if(response) {
+      const response = await api.post('/verify-otp/', credentials)
+      if (response) {
         isAuthenticated.value = true
         token.value = response.data.access
         localStorage.setItem('token', response.data.tokens?.access)
@@ -70,7 +70,6 @@ const router = useRouter();
       console.error(err.response?.data || err.message)
     }
   }
-
 
   const login = async (credentials) => {
     try {
@@ -124,7 +123,6 @@ const router = useRouter();
     try {
       const response = await api.post('password-reset/confirm/', credentials)
 
-      // processErrors
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -134,7 +132,6 @@ const router = useRouter();
     try {
       const response = await api.post('change-password/', credentials)
 
-      // processErrors
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -165,18 +162,28 @@ const router = useRouter();
     }
   }
 
-
-  const getUser = async ()=>{
+  const getPreferences = async () => {
     try {
-      const response = await api.get('profile/')
+      const response = await api.get('notifications-preferences/')
 
-      // processErrors
       return response
     } catch (err) {
-      processErrors(err.response?.data || err.message)
+      processErrors(err.response.data.detail)
     }
   }
-
+  const postPreferences = async (permissions, obtainedId) => {
+    try {
+      if (obtainedId !== null) {
+        const response = await api.patch(`notifications-preferences/${obtainedId}/`, permissions)
+        return response
+      } else {
+        const response = await api.post('notifications-preferences/', permissions)
+        return response
+      }
+    } catch (err) {
+      processErrors(err.response.data.detail)
+    }
+  }
   return {
     currentUser,
     isAuthenticated,
@@ -190,6 +197,7 @@ const router = useRouter();
     forget,
     changePassword,
     resetPassword,
-    getUser,
+    getPreferences,
+    postPreferences,
   }
 })
