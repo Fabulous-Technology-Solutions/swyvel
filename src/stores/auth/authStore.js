@@ -34,14 +34,6 @@ export const useAuthStore = defineStore('auth', () => {
   const signup = async (credentials) => {
     try {
       const response = await api.post('/register/', credentials)
-      // isAuthenticated.value = true
-      // token.value = response.data.access
-      // localStorage.setItem('token', response.data.access)
-      // localStorage.setItem('refreshToken', response.data.refresh)
-      // currentRole.value = getRoleName(response.data.user?.role)
-      // localStorage.setItem('role', currentRole.value)
-      // router.push('/auth/verify-otp')
-      // newUserId.value = response.data.user.id
       return response
     } catch (err) {
       processErrors(err.response?.data || err.message)
@@ -90,7 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
       return response
     } catch (err) {
       // processErrors(err.response?.data || err.message)
-      console.log(err)
+      // console.log(err)
       Notify.create({
         type: 'negative',
         message: err.response.data?.message || 'Login Failed',
@@ -98,15 +90,6 @@ export const useAuthStore = defineStore('auth', () => {
       })
     }
 
-    // catch (err) {
-    //   // processErrors(err.response?.data || err.message)
-    //   console.log(err)
-    //   Notify.create({
-    //     type: 'negative',
-    //     message: err.response.data?.message || 'Login Failed',
-    //     position: 'top',
-    //   })
-    // }
   }
 
   const forget = async (credentials) => {
@@ -151,11 +134,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.removeItem('token')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('role')
-      Notify.create({
-        type: 'positive',
-        message: 'Logout Successful',
-        position: 'top',
-      })
+      router.push('/auth/login')
     } catch (err) {
       console.error('Logout failed:', err)
       throw err
@@ -164,7 +143,9 @@ export const useAuthStore = defineStore('auth', () => {
 
   const getPreferences = async () => {
     try {
+
       const response = await api.get('notifications-preferences/')
+
 
       return response
     } catch (err) {
@@ -184,6 +165,31 @@ export const useAuthStore = defineStore('auth', () => {
       processErrors(err.response.data.detail)
     }
   }
+  
+  const getUser = async ()=>{
+    try {
+      const response = await api.get('profile/')
+      return response
+    } catch (err) {
+      processErrors(err.response?.data || err.message)
+    }
+  }
+  
+  const updateUser = async (credentials)=>{
+    try {
+      const response = await api.patch('profile/', credentials)
+      Notify.create({
+        type: 'positive',
+        message: 'Profile Updated Successfully!',
+        position: 'top',
+      })
+      return response
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+
   return {
     currentUser,
     isAuthenticated,
@@ -197,7 +203,10 @@ export const useAuthStore = defineStore('auth', () => {
     forget,
     changePassword,
     resetPassword,
+    getUser,
+    updateUser,
     getPreferences,
     postPreferences,
+
   }
 })
