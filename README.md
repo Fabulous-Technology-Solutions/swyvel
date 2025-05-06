@@ -2,7 +2,7 @@
 
 Swyvel App Is Health Care Management System
 
-## Install the dependencies
+## Install the dependenciess
 ```bash
 yarn
 # or
