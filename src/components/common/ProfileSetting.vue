@@ -397,6 +397,10 @@ const postPermissions = async () => {
       router,
     })
     isLoading.value = false
+    if(!obtainedId.value)
+    {
+      getPermissions()
+    }
   } else {
     isLoading.value = false
   }
