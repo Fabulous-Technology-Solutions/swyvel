@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from 'src/stores/auth/authStore'
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: 'http://swyvel-be-env.eba-tfampibc.us-east-2.elasticbeanstalk.com/api',
 })
 
 api.interceptors.request.use(
