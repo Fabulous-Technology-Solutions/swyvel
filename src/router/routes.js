@@ -140,6 +140,11 @@ const routes = [
         name: 'otp',
         component: () => import('src/pages/OTPScreen.vue'),
       },
+      {
+        path: 'email-confirmation',
+        name: 'email confirmation',
+        component: () => import('src/pages/EmailConfirmation.vue'),
+      },
 
     ],
   },

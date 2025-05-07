@@ -156,9 +156,10 @@ const handleSignup = async () => {
     // Only proceed if response exists (success case)
     handleSuccess(response, {
       successMessage: 'Account created successfully an email has been sended to you email for the otp!',
-      redirectRoute: '',
+      redirectRoute: '/auth/email-confirmation',
       router,
     })
+    localStorage.setItem("email", formData.email)
     isLoading.value = false
   } else {
     isLoading.value = false
