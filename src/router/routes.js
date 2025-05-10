@@ -43,25 +43,29 @@ const routes = [
             component: () => import('src/components/common/ProfileSetting.vue'),
           },
           // * admin side
-          { path: 'overview',
-            name:'overview',
-            component: () => import('src/components/admin/overview/OverviewStats.vue')
+          {
+            path: 'overview',
+            name: 'overview',
+            component: () => import('src/components/admin/overview/OverviewStats.vue'),
           },
-          { path: 'analytics',
-            name:'analytics',
-            component: () => import('src/components/admin/analytics/AnalyticsComp.vue')
+          {
+            path: 'analytics',
+            name: 'analytics',
+            component: () => import('src/components/admin/analytics/AnalyticsComp.vue'),
           },
-          { path: 'ai-insights',
-            name:'ai-driven',
-            component: () => import('src/components/admin/insights/AiInsights.vue')
+          {
+            path: 'ai-insights',
+            name: 'ai-driven',
+            component: () => import('src/components/admin/insights/AiInsights.vue'),
           },
           // { path: 'ai-insights',
           //   name:'ai-driven',
           //   component: () => import('src/components/admin/insights/AiInsights.vue')
           // },
-          { path: 'audience-analysis',
-            name:'audience',
-            component: () => import('src/components/admin/analysis/AudienceAnalysis.vue')
+          {
+            path: 'audience-analysis',
+            name: 'audience',
+            component: () => import('src/components/admin/analysis/AudienceAnalysis.vue'),
           },
           {
             path: 'social-accounts',
@@ -100,7 +104,12 @@ const routes = [
   {
     path: '/',
     component: () => import('src/layouts/LandingLayout.vue'),
-    children: [{ path: '', component: () => import('pages/landingPage.vue') }],
+    children: [
+      { path: '', component: () => import('pages/landingPage.vue') },
+      { path: 'privacy-policy', name:'privacy-policy', component: () => import('pages/PrivacyPolicy.vue') },
+      { path: 'terms-and-conditions', name:'terms-and-conditions', component: () => import('pages/TermsConditions.vue') },
+
+    ],
   },
   // { path: '/auth/login', component: () => import('pages/LoginPage.vue') },
   // { path: '/auth/signup', component: () => import('pages/SignupPage.vue') },
@@ -145,11 +154,8 @@ const routes = [
         name: 'email confirmation',
         component: () => import('src/pages/EmailConfirmation.vue'),
       },
-
     ],
   },
-
-
 
   // Always leave this as last one,
   // but you can also remove it

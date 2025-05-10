@@ -12,7 +12,7 @@
                 :key="index"
                 class="cursor-pointer text-center"
                 flat
-                @click="scrollTo(tab.routeId)"
+                @click="handleTabClick(tab)"
                 outline
               >
                 <label class="q-ml-sm" :for="tab.name">
@@ -145,8 +145,9 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
-
+import { reactive, ref, onMounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const tabLinks = reactive([
   {
     name: 'Home',
@@ -168,11 +169,41 @@ const tabLinks = reactive([
     name: 'Contact Us',
     routeId: 'Contact',
   },
+  {
+    name: 'Privacy Policy',
+    route: 'privacy-policy',
+  },
+  {
+    name: 'Terms & Conditions',
+    route: 'terms-and-conditions',
+  },
 ])
 const drawerLeft = ref(false)
 const showHide = (val) => {
   drawerLeft.value = val
 }
+const handleTabClick = async (tab) => {
+  if (tab.route) {
+    router.push({ name: tab.route })
+  } else if (tab.routeId) {
+    if (router.currentRoute.value.path !== '/') {
+      // Save the target ID temporarily
+      sessionStorage.setItem('scrollTarget', tab.routeId)
+      await router.push('/')
+    } else {
+      scrollTo(tab.routeId)
+    }
+  }
+}
+onMounted(async () => {
+  const target = sessionStorage.getItem('scrollTarget')
+  if (target) {
+    await nextTick()
+    scrollTo(target)
+    sessionStorage.removeItem('scrollTarget') // Clean up
+  }
+})
+
 const scrollTo = (id) => {
   const section = document.getElementById(id)
   if (section) {
